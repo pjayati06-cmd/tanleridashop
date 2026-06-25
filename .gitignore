@@ -36,3 +36,8 @@ costing_report.html
 # Local MCP Config
 mcp_config.json
 
+# Logs
+*.log
+firebase-debug.log
+
+
