@@ -40,4 +40,8 @@ mcp_config.json
 *.log
 firebase-debug.log
 
+# Firebase Cache
+.firebase/
+
+
 
