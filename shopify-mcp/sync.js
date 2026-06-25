@@ -34,7 +34,7 @@ const STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN || 'tan-lerida.myshopify.c
 const THEME_ID = process.env.SHOPIFY_THEME_ID || '197507121233';
 const ACCESS_TOKEN = process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN;
 
-const isSimulation = !ACCESS_TOKEN || ACCESS_TOKEN === 'shpat_your_token_here' || ACCESS_TOKEN.startsWith('shpat_internal');
+const isSimulation = !ACCESS_TOKEN || ACCESS_TOKEN === 'shpat_your_token_here' || ACCESS_TOKEN.startsWith('shpat_internal') || ACCESS_TOKEN.startsWith('shpss_');
 
 console.log(`[Shopify Sync] Mode: ${isSimulation ? 'SIMULATION (Local)' : 'LIVE (Shopify)'}`);
 console.log(`[Shopify Sync] Store Domain: ${STORE_DOMAIN}`);

@@ -178,7 +178,7 @@ async function callTool(name, args) {
     throw new Error("Shopify Admin API Access Token is not set in environment or .env file. Please configure the token.");
   }
   
-  const isSimulation = accessToken.startsWith('shpat_internal');
+  const isSimulation = accessToken.startsWith('shpat_internal') || accessToken.startsWith('shpss_');
   
   if (isSimulation) {
     return handleSimulation(name, args);
