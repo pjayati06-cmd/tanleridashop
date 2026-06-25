@@ -7,15 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tan-lerida-custom.css">
 <style>
   /* ---- TOKENS (atelier / workshop) ---- */
   :root{
-    --black:#120c07;
-    --espresso:#1f150d;
-    --cognac:#b06a36;
-    --cognac-dark:#97592c;
-    --cream:#f2e9da;
-    --cream-muted:rgba(242,233,218,.7);
+    --black: var(--color-ink-black);
+    --espresso: var(--color-ink-black);
+    --cognac: var(--color-signature-gold);
+    --cognac-dark: #9e7f34;
+    --cream: var(--color-warm-white);
+    --cream-muted: rgba(245, 240, 232, 0.7);
     --spot-r:230px;
 
     /* --- SWAP FOR YOUR ATELIER SHOOT ---
@@ -58,20 +59,6 @@
   .scrim{position:absolute;inset:0;z-index:44;pointer-events:none;
     background:linear-gradient(180deg,rgba(8,5,2,.6) 0%,rgba(8,5,2,0) 26%,rgba(8,5,2,0) 58%,rgba(8,5,2,.78) 100%);}
 
-  /* ---- NAV ---- */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(16px,4vw,56px);}
-  .brand{color:var(--cream);font-size:26px;line-height:1;text-decoration:none;}
-  .brand em{font-style:italic;font-weight:500;}
-  .pill{display:none;position:absolute;left:50%;transform:translateX(-50%);background:rgba(242,233,218,.1);backdrop-filter:blur(10px);border:1px solid rgba(242,233,218,.2);border-radius:999px;padding:6px;gap:2px;align-items:center;}
-  .pill a{color:var(--cream-muted);text-decoration:none;font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;transition:.25s;white-space:nowrap;}
-  .pill a:hover{background:rgba(242,233,218,.16);color:var(--cream);}
-  .pill a.active{color:var(--cream);}
-  .shop{display:none;background:var(--cream);color:#1c130b;border:none;cursor:pointer;font-size:13px;font-weight:600;padding:11px 24px;border-radius:999px;transition:.25s;}
-  .shop:hover{background:#fff;transform:translateY(-1px);}
-  .burger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
-  .burger span{width:22px;height:1.5px;background:var(--cream);display:block;}
-  @media(min-width:900px){.pill{display:flex;}.shop{display:inline-block;}.burger{display:none;}}
-
   /* ---- HEADING ---- */
   .heading{position:absolute;top:15%;left:0;right:0;z-index:50;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;pointer-events:none;}
   .eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--cognac);font-weight:600;margin-bottom:22px;}
@@ -86,8 +73,10 @@
   @media(min-width:640px){.copy-left{display:block;}}
   .copy-right{position:absolute;bottom:40px;left:20px;right:20px;z-index:50;display:flex;flex-direction:column;align-items:flex-start;gap:18px;}
   .copy-right p{font-size:13px;line-height:1.55;color:var(--cream-muted);max-width:520px;}
-  .cta{background:var(--cognac);color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:500;padding:14px 30px;border-radius:999px;transition:.25s;}
-  .cta:hover{background:var(--cognac-dark);transform:scale(1.03);box-shadow:0 10px 30px rgba(176,106,54,.35);}
+  
+  /* Tannery Green button with 0.25rem corner radius (ROUND_FOUR) */
+  .cta{background:var(--color-tannery-green);color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:500;padding:14px 30px;border-radius:var(--button-radius);transition:.25s;}
+  .cta:hover{background:var(--color-tannery-green-dark);transform:scale(1.03);box-shadow:0 10px 30px rgba(44, 74, 62, 0.25);}
   .cta:active{transform:scale(.97);}
   @media(min-width:640px){.copy-right{left:auto;right:clamp(16px,4vw,56px);bottom:96px;max-width:280px;align-items:flex-end;text-align:right;}.copy-right p{font-size:14px;}}
 
@@ -103,16 +92,16 @@
 </head>
 <body>
 
-<nav>
-  <a class="brand serif" href="/">Tan <em>Lerida</em></a>
-  <div class="pill">
+<nav id="nav" class="nav-container nav-dark-init">
+  <a class="brand" href="/">Tan <em>Lerida</em></a>
+  <div class="nav-pill">
     <a href="/" class="active">Man</a>
     <a href="/">Woman</a>
     <a href="/">Lifestyle</a>
     <a href="/care-guide">Care</a>
     <a href="/commitment">Commitment</a>
   </div>
-  <button class="shop">Shop</button>
+  <a class="nav-shop" href="/">Shop</a>
   <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 

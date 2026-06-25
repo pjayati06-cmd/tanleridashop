@@ -746,3 +746,177 @@ h1, h2, h3, h4, h5, h6,
   gap: 16px;
 }
 
+/* ============ Unified Sticky Navigation Bar ============ */
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(16px, 4vw, 56px);
+  transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+}
+
+/* Transparent initial dark state (for heroes) */
+.nav-container.nav-dark-init {
+  background: transparent;
+}
+.nav-container.nav-dark-init .brand {
+  color: var(--color-warm-white);
+}
+.nav-container.nav-dark-init .nav-pill {
+  background: rgba(245, 240, 232, 0.1);
+  border: 1px solid rgba(245, 240, 232, 0.15);
+}
+.nav-container.nav-dark-init .nav-pill a {
+  color: rgba(245, 240, 232, 0.7);
+}
+.nav-container.nav-dark-init .nav-pill a:hover,
+.nav-container.nav-dark-init .nav-pill a.active {
+  color: var(--color-warm-white);
+  background: rgba(245, 240, 232, 0.16);
+}
+.nav-container.nav-dark-init .nav-shop {
+  background: var(--color-warm-white);
+  color: var(--color-ink-black);
+}
+.nav-container.nav-dark-init .nav-shop:hover {
+  background: #FFFFFF;
+}
+.nav-container.nav-dark-init .burger span {
+  background: var(--color-warm-white);
+}
+
+/* Light initial state (for editorial pages like Care & Commitment) */
+.nav-container.nav-light-init {
+  background: var(--color-warm-white);
+  box-shadow: 0 1px 0 rgba(26, 23, 20, 0.08);
+}
+.nav-container.nav-light-init .brand {
+  color: var(--color-ink-black);
+}
+.nav-container.nav-light-init .nav-pill {
+  background: rgba(26, 23, 20, 0.04);
+  border: 1px solid rgba(26, 23, 20, 0.08);
+}
+.nav-container.nav-light-init .nav-pill a {
+  color: var(--color-stone-grey);
+}
+.nav-container.nav-light-init .nav-pill a:hover,
+.nav-container.nav-light-init .nav-pill a.active {
+  color: var(--color-ink-black);
+  background: rgba(26, 23, 20, 0.08);
+}
+.nav-container.nav-light-init .nav-shop {
+  background: var(--color-tannery-green);
+  color: #FFFFFF;
+}
+.nav-container.nav-light-init .nav-shop:hover {
+  background: var(--color-tannery-green-dark);
+}
+.nav-container.nav-light-init .burger span {
+  background: var(--color-ink-black);
+}
+
+/* Scrolled state (for all) */
+.nav-container.scrolled {
+  background: var(--color-warm-white) !important;
+  box-shadow: 0 1px 0 rgba(26, 23, 20, 0.08) !important;
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+.nav-container.scrolled .brand {
+  color: var(--color-ink-black) !important;
+}
+.nav-container.scrolled .nav-pill {
+  background: rgba(26, 23, 20, 0.04) !important;
+  border-color: rgba(26, 23, 20, 0.08) !important;
+}
+.nav-container.scrolled .nav-pill a {
+  color: var(--color-stone-grey) !important;
+}
+.nav-container.scrolled .nav-pill a:hover,
+.nav-container.scrolled .nav-pill a.active {
+  color: var(--color-ink-black) !important;
+  background: rgba(26, 23, 20, 0.08) !important;
+}
+.nav-container.scrolled .nav-shop {
+  background: var(--color-tannery-green) !important;
+  color: #FFFFFF !important;
+}
+.nav-container.scrolled .nav-shop:hover {
+  background: var(--color-tannery-green-dark) !important;
+}
+.nav-container.scrolled .burger span {
+  background: var(--color-ink-black) !important;
+}
+
+/* Navigation elements typography & layout */
+.brand {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1;
+  text-decoration: none;
+}
+.brand em {
+  font-style: italic;
+  font-weight: 500;
+}
+.nav-pill {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: var(--button-radius);
+  padding: 4px;
+  gap: 2px;
+  align-items: center;
+  transition: 0.4s;
+}
+.nav-pill a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: var(--button-radius);
+  transition: 0.25s;
+  white-space: nowrap;
+}
+.nav-shop {
+  display: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 11px 24px;
+  border-radius: var(--button-radius);
+  transition: 0.25s;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.burger span {
+  width: 22px;
+  height: 1.5px;
+  display: block;
+  transition: background 0.4s;
+}
+
+@media(min-width:900px) {
+  .nav-pill { display: flex; }
+  .nav-shop { display: inline-block; }
+  .burger { display: none; }
+}
+

@@ -13,69 +13,15 @@
   body {
     margin: 0;
     padding: 0;
+    padding-top: 80px;
     background-color: var(--color-warm-white);
-  }
-  nav {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px clamp(16px, 4vw, 56px);
-    background-color: var(--color-warm-white);
-    box-shadow: 0 1px 0 rgba(42,31,21,.14);
-  }
-  nav .brand {
-    font-family: var(--font-heading);
-    font-size: 26px;
-    line-height: 1;
-    color: var(--color-ink-black);
-    text-decoration: none;
-  }
-  nav .brand em {
-    font-style: italic;
-    font-weight: 500;
-  }
-  .nav-pill {
-    display: flex;
-    background: rgba(42,31,21,.05);
-    border-radius: 999px;
-    padding: 6px;
-    gap: 2px;
-  }
-  .nav-pill a {
-    color: var(--color-stone-grey);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 999px;
-    transition: .25s;
-  }
-  .nav-pill a:hover, .nav-pill a.active {
-    color: var(--color-ink-black);
-    background: rgba(42,31,21,.08);
-  }
-  .nav-shop {
-    background: var(--color-tannery-green);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 11px 24px;
-    border-radius: 999px;
-    transition: .25s;
-    text-decoration: none;
-  }
-  .nav-shop:hover {
-    background: var(--color-tannery-green-dark);
   }
 </style>
 </head>
 <body>
 
 <!-- Navigation Bar -->
-<nav>
+<nav id="nav" class="nav-container nav-light-init">
   <a class="brand" href="/">Tan <em>Lerida</em></a>
   <div class="nav-pill">
     <a href="/">Man</a>
@@ -85,6 +31,7 @@
     <a href="/commitment">Commitment</a>
   </div>
   <a class="nav-shop" href="/">Shop</a>
+  <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- Main Care Guide Section -->
@@ -242,6 +189,11 @@
       });
     });
   }
+
+  // Sticky navigation scroll state
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 60); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 })();
 </script>
 </body>
