@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Product Care Guide — Tan Lerida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tan-lerida-custom.css">
+<style>
+  /* Local wrapper style override to make sure it looks like a full page in the preview */
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-warm-white);
+  }
+  nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px clamp(16px, 4vw, 56px);
+    background-color: var(--color-warm-white);
+    box-shadow: 0 1px 0 rgba(42,31,21,.14);
+  }
+  nav .brand {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    line-height: 1;
+    color: var(--color-ink-black);
+    text-decoration: none;
+  }
+  nav .brand em {
+    font-style: italic;
+    font-weight: 500;
+  }
+  .nav-pill {
+    display: flex;
+    background: rgba(42,31,21,.05);
+    border-radius: 999px;
+    padding: 6px;
+    gap: 2px;
+  }
+  .nav-pill a {
+    color: var(--color-stone-grey);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: .25s;
+  }
+  .nav-pill a:hover, .nav-pill a.active {
+    color: var(--color-ink-black);
+    background: rgba(42,31,21,.08);
+  }
+  .nav-shop {
+    background: var(--color-tannery-green);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 999px;
+    transition: .25s;
+    text-decoration: none;
+  }
+  .nav-shop:hover {
+    background: var(--color-tannery-green-dark);
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+  <a class="brand" href="#">Tan <em>Lerida</em></a>
+  <div class="nav-pill">
+    <a href="#">Man</a>
+    <a href="#">Woman</a>
+    <a href="#">Lifestyle</a>
+    <a href="#" class="active">Care</a>
+    <a href="#">Commitment</a>
+  </div>
+  <a class="nav-shop" href="#">Shop</a>
+</nav>
+
+<!-- Main Care Guide Section -->
+<section class="care-guide-section" id="care-preview">
+  <div class="care-guide-container">
+    
+    <!-- Editorial Header -->
+    <header class="care-guide-header">
+      <p class="eyebrow">At source</p>
+      <h1>Made for living.</h1>
+      <p class="intro">Full-grain leather is not meant to be preserved under glass. We shape it by hand in our workshop using hides finished at our 35-year-old tannery, so it can live with you. It will soften where you hold it, shaped by your daily habits, and gather a rich patina that tells the story of everywhere you've been.</p>
+    </header>
+
+    <!-- The Three Core Rules -->
+    <div class="care-rules-grid">
+      <div class="care-rule-card">
+        <div class="card-image-wrapper">
+          <img src="./assets/care_water_wipe.png" alt="Wiping water droplets from tan leather hide" loading="lazy">
+        </div>
+        <span class="rule-num">RULE 01</span>
+        <h3>Keep it dry</h3>
+        <p>Water draws out the natural oils finished in the hide at source. If your piece gets wet, wipe it immediately with a soft cloth and let it air-dry naturally. Keep it away from direct heat source.</p>
+      </div>
+      <div class="care-rule-card">
+        <div class="card-image-wrapper">
+          <img src="./assets/care_storage_dustbag.png" alt="Tan leather goods in a cream cotton dust bag" loading="lazy">
+        </div>
+        <span class="rule-num">RULE 02</span>
+        <h3>Let it breathe</h3>
+        <p>Leather needs air to keep its natural structure balanced. Avoid storing your bags or jackets in airtight plastic covers. Use the cotton dust bags we provide to let the grain breathe.</p>
+      </div>
+      <div class="care-rule-card">
+        <div class="card-image-wrapper">
+          <img src="./assets/care_conditioner_wax.png" alt="Organic beeswax conditioner tin beside tan leather" loading="lazy">
+        </div>
+        <span class="rule-num">RULE 03</span>
+        <h3>Condition with care</h3>
+        <p>We finish our full-grain leather to outlast the seasons. Every six months, apply a thin coat of natural organic wax conditioner. It will soften the surface and help the patina grow.</p>
+      </div>
+    </div>
+
+    <!-- Interactive Patina Ageing Simulator -->
+    <div class="patina-widget-box">
+      <h2>The Patina Simulator</h2>
+      <p class="widget-desc">Move the slider to see how full-grain leather changes over five years of living. The hide softens and gathers a rich, dark character.</p>
+      
+      <div class="patina-simulator">
+        <div class="simulator-images">
+          <img src="./assets/leather_new_grain.png" class="sim-img new-grain" alt="New full-grain leather grain">
+          <img src="./assets/leather_patina_grain.png" class="sim-img patina-grain" id="patinaImage-preview" alt="Full-grain leather with five years of aged patina">
+        </div>
+        <div class="slider-container">
+          <span class="slider-label label-new">New hide</span>
+          <input type="range" min="0" max="100" value="0" class="patina-slider" id="patinaSlider-preview" aria-label="Aged Patina Slider Simulator">
+          <span class="slider-label label-patina">5 Years worn</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Troubleshooting Tabs -->
+    <div class="trouble-tabs-box">
+      <h2>Troubleshooting Guide</h2>
+      
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="scratched-preview">Scratched</button>
+        <button class="tab-btn" data-tab="wet-preview">Wet</button>
+        <button class="tab-btn" data-tab="dusty-preview">Dusty</button>
+      </div>
+      
+      <div class="tabs-content">
+        <!-- Scratched -->
+        <div class="tab-pane active" id="scratched-preview">
+          <h3>Scratches & Marks</h3>
+          <p>A mark is not a defect; it is a sign that your leather is living. For light fingernail marks, simply rub the surface firmly with your thumb. The warmth and natural oils from your hand will distribute the wax and soften the mark back into the grain.</p>
+          <div class="specs-box">
+            <span>METHOD: BUFF WITH NATURAL SKIN OILS</span>
+          </div>
+        </div>
+        
+        <!-- Wet -->
+        <div class="tab-pane" id="wet-preview">
+          <h3>Liquid Spills</h3>
+          <p>Do not panic, and do not use a hairdryer. Blot the water immediately with a clean dry cloth. Hang your garment or place your bag in a cool, ventilated room. Allow it to air-dry naturally before applying conditioner.</p>
+          <div class="specs-box">
+            <span>DRYING TIME: 24 HOURS (NATURAL AIRFLOW)</span>
+          </div>
+        </div>
+        
+        <!-- Dusty -->
+        <div class="tab-pane" id="dusty-preview">
+          <h3>Dust & Dirt</h3>
+          <p>Wipe the surface weekly with a dry, lint-free cloth to remove surface dust. For deeper clean, use a damp cloth with mild vegetable glycerin soap. Always test a small spot first, and let it dry completely.</p>
+          <div class="specs-box">
+            <span>CLEANING INTERVAL: WEEKLY OR POST-TRAVEL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specifications Table -->
+    <div class="spec-instructions">
+      <h2>Care Specifications</h2>
+      <div class="spec-table-row">
+        <span>Routine Conditioning</span>
+        <span>Every 6 Months</span>
+      </div>
+      <div class="spec-table-row">
+        <span>Moisture Tolerance</span>
+        <span>Wipe immediately</span>
+      </div>
+      <div class="spec-table-row">
+        <span>Storage Temperature</span>
+        <span>15°C – 25°C</span>
+      </div>
+      <div class="spec-table-row">
+        <span>Air Drying Time</span>
+        <span>24 Hours (Natural)</span>
+      </div>
+      <div class="spec-table-row">
+        <span>Conditioning Formula</span>
+        <span>100% natural beeswax / lanolin base</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function() {
+  // Patina Slider
+  const slider = document.getElementById('patinaSlider-preview');
+  const patinaImg = document.getElementById('patinaImage-preview');
+  if (slider && patinaImg) {
+    slider.addEventListener('input', function() {
+      patinaImg.style.opacity = this.value / 100;
+    });
+  }
+
+  // Troubleshooting Tabs
+  const container = document.getElementById('care-preview');
+  if (container) {
+    const tabBtns = container.querySelectorAll('.tab-btn');
+    const tabPanes = container.querySelectorAll('.tab-pane');
+    
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanes.forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const targetId = this.getAttribute('data-tab');
+        const pane = container.querySelector('#' + targetId);
+        if (pane) {
+          pane.classList.add('active');
+        }
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>

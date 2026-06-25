@@ -1,0 +1,18 @@
+{
+  "name": "open-code-ai-workspace",
+  "version": "1.0.0",
+  "description": "Workspace utilities and styling configurations for SPC Leather & Tan Lerida",
+  "scripts": {
+    "setup": "powershell.exe -ExecutionPolicy Bypass -File ./setup_env.ps1",
+    "cost": ".\\.venv\\Scripts\\python.exe costing_agent.py",
+    "ml-analyze": ".\\.venv\\Scripts\\python.exe costing_analyzer_ml.py",
+    "dev": "npm --prefix \"Tan Lerida/Website\" run dev",
+    "build": "npm --prefix \"Tan Lerida/Website\" run build",
+    "preview": "npm --prefix \"Tan Lerida/Website\" run preview"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

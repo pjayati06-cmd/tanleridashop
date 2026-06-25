@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "commitment",
+      "settings": {
+        "eyebrow": "Our Promise",
+        "title": "We own the making, so we own the standard.",
+        "intro": "We believe that the only way to guarantee how something is built is to build it ourselves. From the initial tanning process to the final stitch, every step happens under our own roof."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

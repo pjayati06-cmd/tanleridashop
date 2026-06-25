@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPC Leather — Capability Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    img, svg { display: block; max-width: 100%; }
+
+    :root {
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-sans: 'Inter', sans-serif;
+
+      --bg: #1A1410;
+      --surface: #F7F3ED;
+      --surface-warm: #EDE7DC;
+      --text: #1A1410;
+      --text-muted: #6B5D52;
+      --text-subtle: #9C8E83;
+      --border: #D4C9B8;
+      --accent: #9B6A3A;
+      --accent-deep: #7A4E22;
+      --accent-soft: #F0E4D4;
+      --gold: #C49A4A;
+      --gold-soft: #F5EDD8;
+
+      --radius-sm: 2px;
+      --radius-md: 4px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .canvas {
+      width: 800px;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.4);
+    }
+
+    /* ─── HEADER ─── */
+    .header {
+      background: var(--bg);
+      padding: 36px 44px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 320px; height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(155,106,58,0.12) 100%);
+      pointer-events: none;
+    }
+
+    .header-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-eyebrow::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .header-title {
+      font-family: var(--font-serif);
+      font-size: 46px;
+      font-weight: 300;
+      color: #F7F3ED;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .header-title strong {
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .header-sub {
+      font-size: 12px;
+      color: rgba(247,243,237,0.45);
+      letter-spacing: 0.04em;
+      margin-top: 12px;
+    }
+
+    /* ─── STATS STRIP ─── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--accent-deep);
+    }
+
+    .stat-cell {
+      padding: 18px 20px;
+      border-right: 1px solid rgba(247,243,237,0.12);
+      position: relative;
+    }
+
+    .stat-cell:last-child { border-right: none; }
+
+    .stat-value {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,243,237,0.55);
+      line-height: 1.3;
+    }
+
+    /* ─── INTEGRATION BAR ─── */
+    .integration-bar {
+      background: var(--gold-soft);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 44px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .int-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--accent-deep);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      flex: 1;
+    }
+
+    .int-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .int-arrow {
+      font-size: 14px;
+      color: var(--gold);
+      opacity: 0.7;
+      margin: 0 4px;
+    }
+
+    /* ─── BODY ─── */
+    .body-grid {
+      padding: 36px 44px;
+      display: grid;
+      gap: 28px;
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: 16px;
+    }
+
+    /* ─── CATEGORY CARDS ─── */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--accent);
+    }
+
+    .cat-card.bags::before { background: #9B6A3A; }
+    .cat-card.apparel::before { background: #7A4E22; }
+    .cat-card.slg::before { background: #C49A4A; }
+
+    .cat-icon {
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+
+    .cat-name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+
+    .cat-sub {
+      font-size: 10px;
+      color: var(--text-subtle);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .cat-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .cat-items li {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.4;
+    }
+
+    .cat-items li::before {
+      content: '—';
+      color: var(--accent);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .cat-specs {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .spec-pair { }
+
+    .spec-key {
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: 2px;
+    }
+
+    .spec-val {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ─── CERTIFICATION STRIP ─── */
+    .cert-strip {
+      background: var(--bg);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cert-badge {
+      background: var(--gold);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cert-badge-text {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--bg);
+      line-height: 1;
+    }
+
+    .cert-badge-sub {
+      font-size: 6px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      opacity: 0.8;
+    }
+
+    .cert-text { flex: 1; }
+
+    .cert-headline {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: #F7F3ED;
+      margin-bottom: 4px;
+    }
+
+    .cert-detail {
+      font-size: 10.5px;
+      color: rgba(247,243,237,0.5);
+      line-height: 1.5;
+    }
+
+    .cert-cats {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .cert-chip {
+      background: rgba(196,154,74,0.15);
+      border: 1px solid rgba(196,154,74,0.3);
+      color: var(--gold);
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* ─── PROCESS ─── */
+    .process-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .proc-step {
+      text-align: center;
+      position: relative;
+    }
+
+    .proc-step::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      right: -4px;
+      width: 8px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .proc-step:last-child::after { display: none; }
+
+    .proc-num {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0 auto 8px;
+      background: var(--surface-warm);
+    }
+
+    .proc-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+
+    .proc-sub {
+      font-size: 9px;
+      color: var(--text-subtle);
+      line-height: 1.3;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--surface-warm);
+      border-top: 1px solid var(--border);
+      padding: 18px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .footer-brand span {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .footer-contact {
+      text-align: right;
+    }
+
+    .footer-contact a,
+    .footer-contact div {
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      display: block;
+      line-height: 1.7;
+    }
+
+    .footer-ref {
+      font-size: 9.5px;
+      color: var(--text-subtle);
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 44px;
+    }
+
+  </style>
+</head>
+<body>
+  <main class="canvas">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-eyebrow">Integrated Tannery & Manufacturer &nbsp;·&nbsp; Est. 1989 &nbsp;·&nbsp; Murthal, India</div>
+      <div class="header-title">Santosh Pargal<br><strong>&amp; Co</strong></div>
+      <div class="header-sub">SPC Leather &nbsp;|&nbsp; Private Label &amp; Export Manufacturing &nbsp;|&nbsp; info@spcleather.com</div>
+    </header>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip">
+      <div class="stat-cell">
+        <div class="stat-value">35+</div>
+        <div class="stat-label">Years in<br>operation</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">2L sqft</div>
+        <div class="stat-label">Tannery output<br>per month</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">3–8 wks</div>
+        <div class="stat-label">Lead time<br>across categories</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">Gold</div>
+        <div class="stat-label">LWG Certified<br>Ref: SAN101</div>
+      </div>
+    </div>
+
+    <!-- INTEGRATION BAR -->
+    <div class="integration-bar">
+      <div class="int-step"><div class="int-dot"></div>Raw hide</div>
+      <div class="int-arrow">›</div>
+      <div class="int-step"><div class="int-dot"></div>Tannery</div>
+      <div class="int-arrow">›</div>
+      <div class="int-step"><div class="int-dot"></div>Cutting</div>
+      <div class="int-arrow">›</div>
+      <div class="int-step"><div class="int-dot"></div>Production</div>
+      <div class="int-arrow">›</div>
+      <div class="int-step"><div class="int-dot"></div>QC &amp; Dispatch</div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="body-grid">
+      <div>
+        <div class="section-label">What we manufacture</div>
+        <div class="categories">
+
+          <!-- BAGS -->
+          <div class="cat-card bags">
+            <div class="cat-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B6A3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+            </div>
+            <div class="cat-name">Bags &amp;<br>Accessories</div>
+            <div class="cat-sub">Full-grain sheep &amp; goat</div>
+            <ul class="cat-items">
+              <li>Totes &amp; shoulder bags</li>
+              <li>Crossbody &amp; backpacks</li>
+              <li>Clutches &amp; laptop bags</li>
+              <li>Smooth, pebbled, metallic</li>
+            </ul>
+            <div class="cat-specs">
+              <div class="spec-pair">
+                <div class="spec-key">Trial MOQ</div>
+                <div class="spec-val">50 units</div>
+              </div>
+              <div class="spec-pair">
+                <div class="spec-key">Lead time</div>
+                <div class="spec-val">3–6 wks</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- APPAREL -->
+          <div class="cat-card apparel">
+            <div class="cat-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A4E22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
+              </svg>
+            </div>
+            <div class="cat-name">Apparel<br>Jackets &amp; Coats</div>
+            <div class="cat-sub">Full-grain nappa leather</div>
+            <ul class="cat-items">
+              <li>Biker &amp; bomber jackets</li>
+              <li>Blazers &amp; trench coats</li>
+              <li>Moto styles</li>
+              <li>Smooth, washed, vintage</li>
+            </ul>
+            <div class="cat-specs">
+              <div class="spec-pair">
+                <div class="spec-key">Trial MOQ</div>
+                <div class="spec-val">25 units</div>
+              </div>
+              <div class="spec-pair">
+                <div class="spec-key">Lead time</div>
+                <div class="spec-val">3–8 wks</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLG -->
+          <div class="cat-card slg">
+            <div class="cat-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C49A4A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+            </div>
+            <div class="cat-name">Small Leather<br>Goods</div>
+            <div class="cat-sub">Full-grain leather</div>
+            <ul class="cat-items">
+              <li>Wallets &amp; cardholders</li>
+              <li>Key fobs &amp; passport covers</li>
+              <li>Belts &amp; watch straps</li>
+              <li>Smooth, embossed, burnished</li>
+            </ul>
+            <div class="cat-specs">
+              <div class="spec-pair">
+                <div class="spec-key">Trial MOQ</div>
+                <div class="spec-val">100 units</div>
+              </div>
+              <div class="spec-pair">
+                <div class="spec-key">Lead time</div>
+                <div class="spec-val">2–5 wks</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROCESS -->
+      <div>
+        <div class="section-label">How an order works</div>
+        <div class="process-row">
+          <div class="proc-step">
+            <div class="proc-num">01</div>
+            <div class="proc-label">Share your brief</div>
+            <div class="proc-sub">Tech pack, sample, or description</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">02</div>
+            <div class="proc-label">Feasibility check</div>
+            <div class="proc-sub">Leather &amp; timeline confirmed</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">03</div>
+            <div class="proc-label">Sampling</div>
+            <div class="proc-sub">Cost credited to order</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">04</div>
+            <div class="proc-label">Confirm + 50%</div>
+            <div class="proc-sub">Lead time begins here</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">05</div>
+            <div class="proc-label">Production &amp; QC</div>
+            <div class="proc-sub">Full docs on dispatch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CERTIFICATION STRIP -->
+    <div class="cert-strip">
+      <div class="cert-badge">
+        <div class="cert-badge-text">LWG</div>
+        <div class="cert-badge-sub">Gold</div>
+      </div>
+      <div class="cert-text">
+        <div class="cert-headline">LWG Gold Certified — 12 of 12 categories rated Gold</div>
+        <div class="cert-detail">Ref: SAN101 &nbsp;·&nbsp; Audited Feb 2026 &nbsp;·&nbsp; Valid to Feb 2028 &nbsp;·&nbsp; Verifiable at leatherworkinggroup.com</div>
+      </div>
+      <div class="cert-cats">
+        <div class="cert-chip">Energy</div>
+        <div class="cert-chip">Water</div>
+        <div class="cert-chip">Waste</div>
+        <div class="cert-chip">Chemicals</div>
+        <div class="cert-chip">Traceability</div>
+        <div class="cert-chip">34% CO₂ cut</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-brand">
+        Santosh Pargal &amp; Co
+        <span>SPC Leather &nbsp;·&nbsp; Murthal, Sonipat, Haryana &nbsp;·&nbsp; Est. 1989</span>
+      </div>
+      <div class="footer-contact">
+        <div>info@spcleather.com</div>
+        <div>www.spcleather.com</div>
+        <div class="footer-ref">LWG Gold · SAN101 · Valid Feb 2028 · Full capability pack on request</div>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tan Lerida — Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ---- TOKENS (leather world) ---- */
+  :root{
+    --leather-black:#17110c;
+    --espresso:#241a12;
+    --cognac:#b06a36;        /* CTA / accent */
+    --cognac-dark:#97592c;
+    --cream:#f4ede2;
+    --cream-muted:rgba(244,237,226,.72);
+    --spot-r:240px;          /* spotlight radius */
+
+    /* --- SWAP THESE FOR YOUR OWN SHOOT ---
+       BASE  = finished product shot (moody, full-bleed)
+       REVEAL= the SAME framing showing grain / stitch / craft detail
+       For the strongest effect, shoot a matched pair (same crop, same angle). */
+    --img-base:url('https://tanlerida.com/cdn/shop/files/banner03.png?v=1773294694&width=2400');
+    --img-reveal:url('https://tanlerida.com/cdn/shop/files/banner04.png?v=1773295045&width=2400');
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+  .serif{font-family:'Cormorant Garamond',serif;}
+  html,body{background:var(--leather-black);}
+
+  .hero{
+    position:relative;width:100%;height:100vh;height:100dvh;
+    overflow:hidden;background:var(--leather-black);
+    letter-spacing:-.01em;cursor:default;
+  }
+
+  /* layers */
+  .layer{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;}
+  .base{background-image:var(--img-base);z-index:10;animation:kenburns 16s cubic-bezier(.16,1,.3,1) forwards;}
+  .reveal{
+    background-image:var(--img-reveal);z-index:30;pointer-events:none;
+    -webkit-mask-image:radial-gradient(circle var(--spot-r) at -999px -999px,#000 0%,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%);
+            mask-image:radial-gradient(circle var(--spot-r) at -999px -999px,#000 0%,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%);
+    will-change:-webkit-mask-image,mask-image;
+  }
+  /* legibility wash so cream text reads over any photo */
+  .scrim{
+    position:absolute;inset:0;z-index:40;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(10,7,4,.55) 0%,rgba(10,7,4,0) 28%,rgba(10,7,4,0) 60%,rgba(10,7,4,.72) 100%),
+      radial-gradient(120% 80% at 50% 0%,rgba(10,7,4,.25),transparent 60%);
+  }
+
+  /* ---- NAV ---- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(16px,4vw,56px);
+  }
+  .brand{color:var(--cream);font-size:26px;line-height:1;letter-spacing:.01em;}
+  .brand em{font-style:italic;font-weight:500;}
+  .pill{
+    display:none;position:absolute;left:50%;transform:translateX(-50%);
+    background:rgba(244,237,226,.12);backdrop-filter:blur(10px);
+    border:1px solid rgba(244,237,226,.22);border-radius:999px;
+    padding:6px;gap:2px;align-items:center;
+  }
+  .pill a{
+    color:var(--cream-muted);text-decoration:none;font-size:13px;font-weight:500;
+    padding:8px 16px;border-radius:999px;transition:.25s;white-space:nowrap;
+  }
+  .pill a:hover{background:rgba(244,237,226,.16);color:var(--cream);}
+  .pill a.active{color:var(--cream);}
+  .shop{
+    display:none;background:var(--cream);color:#1c130b;border:none;cursor:pointer;
+    font-size:13px;font-weight:600;padding:11px 24px;border-radius:999px;transition:.25s;
+  }
+  .shop:hover{background:#fff;transform:translateY(-1px);}
+  .burger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .burger span{width:22px;height:1.5px;background:var(--cream);display:block;}
+  @media(min-width:900px){
+    .pill{display:flex;} .shop{display:inline-block;} .burger{display:none;}
+  }
+
+  /* ---- HEADING ---- */
+  .heading{
+    position:absolute;top:15%;left:0;right:0;z-index:50;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:0 20px;pointer-events:none;
+  }
+  .heading h1{color:var(--cream);line-height:.92;}
+  .l1{
+    display:block;font-style:italic;font-weight:400;letter-spacing:-.02em;
+    font-size:clamp(46px,9vw,116px);
+  }
+  .l2{
+    display:block;font-weight:300;letter-spacing:-.04em;margin-top:-.06em;
+    font-size:clamp(46px,9vw,116px);
+  }
+  .hint{
+    margin-top:26px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(244,237,226,.55);font-weight:500;
+  }
+
+  /* ---- SUBCOPY ---- */
+  .copy-left{
+    position:absolute;bottom:56px;left:clamp(16px,4vw,56px);z-index:50;max-width:270px;
+    display:none;
+  }
+  .copy-left p{font-size:14px;line-height:1.55;color:var(--cream-muted);}
+  @media(min-width:640px){.copy-left{display:block;}}
+
+  .copy-right{
+    position:absolute;bottom:40px;left:20px;right:20px;z-index:50;
+    display:flex;flex-direction:column;align-items:flex-start;gap:18px;
+  }
+  .copy-right p{font-size:13px;line-height:1.55;color:var(--cream-muted);max-width:520px;}
+  .cta{
+    background:var(--cognac);color:#fff;border:none;cursor:pointer;
+    font-size:14px;font-weight:500;padding:14px 30px;border-radius:999px;
+    transition:.25s;letter-spacing:.01em;
+    box-shadow:0 8px 24px rgba(176,106,54,.0);
+  }
+  .cta:hover{background:var(--cognac-dark);transform:scale(1.03);box-shadow:0 10px 30px rgba(176,106,54,.35);}
+  .cta:active{transform:scale(.97);}
+  @media(min-width:640px){
+    .copy-right{left:auto;right:clamp(16px,4vw,56px);bottom:96px;max-width:280px;align-items:flex-end;text-align:right;}
+    .copy-right p{font-size:14px;}
+  }
+
+  /* ---- LOAD ANIMATIONS ---- */
+  @keyframes kenburns{from{transform:scale(1.12);}to{transform:scale(1);}}
+  @keyframes reveal{from{opacity:0;transform:translateY(26px);filter:blur(10px);}to{opacity:1;transform:translateY(0);filter:blur(0);}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .anim{opacity:0;animation-fill-mode:forwards;animation-timing-function:cubic-bezier(.16,1,.3,1);}
+  .a-reveal{animation-name:reveal;animation-duration:1.1s;}
+  .a-fade{animation-name:fadeUp;animation-duration:1s;}
+
+  @media(prefers-reduced-motion:reduce){
+    .base{animation:none;}
+    .anim{animation:none;opacity:1;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand serif" href="#" style="text-decoration:none">Tan <em>Lerida</em></a>
+  <div class="pill">
+    <a href="#" class="active">Man</a>
+    <a href="#">Woman</a>
+    <a href="#">Lifestyle</a>
+    <a href="#">Care</a>
+    <a href="#">Commitment</a>
+  </div>
+  <button class="shop">Shop</button>
+  <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="layer base hero-base"></div>
+  <div class="layer reveal" id="reveal"></div>
+  <div class="scrim"></div>
+
+  <div class="heading">
+    <h1>
+      <span class="l1 serif anim a-reveal" style="animation-delay:.25s">Crafted to be</span>
+      <span class="l2 anim a-reveal" style="animation-delay:.42s">lived in.</span>
+    </h1>
+    <p class="hint anim a-fade" id="hint" style="animation-delay:.9s">Move to reveal the grain</p>
+  </div>
+
+  <div class="copy-left anim a-fade" style="animation-delay:.7s">
+    <p>Full-grain leather, cut and finished by hand. Each piece carries the marks of its making and softens into something that is yours alone.</p>
+  </div>
+
+  <div class="copy-right anim a-fade" style="animation-delay:.85s">
+    <p>From Adelaide to the world. Jackets, skirts, and everyday leather built to outlast the season.</p>
+    <button class="cta">Explore the collection</button>
+  </div>
+</section>
+
+<script>
+(function(){
+  var R = 240;
+  var reveal = document.getElementById('reveal');
+  var hero   = document.getElementById('hero');
+  var hint   = document.getElementById('hint');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch= window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
+
+  var raw = {x:-999,y:-999};
+  var pos = {x:-999,y:-999};
+  var rafId;
+
+  function paint(x,y){
+    var m = 'radial-gradient(circle '+R+'px at '+x+'px '+y+'px,#000 0%,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%)';
+    reveal.style.webkitMaskImage = m;
+    reveal.style.maskImage = m;
+  }
+
+  function loop(){
+    pos.x += (raw.x - pos.x) * 0.12;   // easing — the trailing-light feel
+    pos.y += (raw.y - pos.y) * 0.12;
+    paint(pos.x, pos.y);
+    rafId = requestAnimationFrame(loop);
+  }
+
+  // ---------- DESKTOP: cursor follows ----------
+  function onMove(e){ raw.x = e.clientX; raw.y = e.clientY; }
+
+  // ---------- MOBILE: drag to reveal + gentle auto-sweep ----------
+  var t = 0;
+  function autoSweep(){
+    t += 0.012;
+    var w = window.innerWidth, h = window.innerHeight;
+    raw.x = w*0.5 + Math.sin(t)*w*0.28;          // slow lissajous drift
+    raw.y = h*0.46 + Math.sin(t*1.6)*h*0.16;
+  }
+  function onTouch(e){
+    if(e.touches && e.touches[0]){
+      raw.x = e.touches[0].clientX;
+      raw.y = e.touches[0].clientY;
+      autoOn = false;                              // user took over
+    }
+  }
+  var autoOn = isTouch;
+
+  // ---------- REDUCED MOTION: soft static reveal, no movement ----------
+  if(reduce){
+    paint(window.innerWidth*0.62, window.innerHeight*0.5);
+    if(hint) hint.style.display='none';
+    return;
+  }
+
+  if(isTouch){
+    if(hint) hint.textContent = 'Drag to reveal the grain';
+    hero.addEventListener('touchmove', onTouch, {passive:true});
+    (function tloop(){
+      if(autoOn) autoSweep();
+      requestAnimationFrame(tloop);
+    })();
+    function tloop(){ if(autoOn) autoSweep(); requestAnimationFrame(tloop); }
+  } else {
+    window.addEventListener('mousemove', onMove);
+  }
+
+  loop();
+
+  window.addEventListener('beforeunload', function(){ cancelAnimationFrame(rafId); });
+})();
+</script>
+</body>
+</html>

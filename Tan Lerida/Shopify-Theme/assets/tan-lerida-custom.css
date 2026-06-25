@@ -1,0 +1,748 @@
+/* ==========================================================================
+   Tan Lerida — Brand Identity Custom Overrides (Shopify Theme Style Sheet)
+   Colors:
+   - Ink Black:     #1A1714 (primary backgrounds, dark surfaces, hero sections)
+   - Signature Gold: #B8933E (headings, logo accents, typography highlights)
+   - Tannery Green:  #2C4A3E (CTA buttons only)
+   - Warm White:    #F5F0E8 (editorial background grids, product listings)
+   - Stone Grey:    #8C8680 (secondary text, muted labels)
+   ========================================================================== */
+
+:root {
+  --color-ink-black: #1A1714;
+  --color-signature-gold: #B8933E;
+  --color-tannery-green: #2C4A3E;
+  --color-tannery-green-dark: #1e352b;
+  --color-warm-white: #F5F0E8;
+  --color-stone-grey: #8C8680;
+  
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-specs: 'Courier New', Courier, monospace;
+  
+  --button-radius: 0.25rem; /* ROUND_FOUR corner radius */
+}
+
+/* ============ Global Typography Reset ============ */
+body, 
+.shopify-section,
+.product-form,
+.cart-notification {
+  font-family: var(--font-body);
+  background-color: var(--color-warm-white);
+  color: var(--color-ink-black);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5, .h6,
+.serif-heading {
+  font-family: var(--font-heading);
+  color: var(--color-ink-black);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Specs/Measurements styling */
+.product-spec,
+.measurement,
+.variant-sku,
+.price--final {
+  font-family: var(--font-specs) !important;
+}
+
+/* ============ The "No-Line" Rule Layouts ============ */
+/* Override default Shopify 1px borders in collections, grids, and header/footer */
+.grid,
+.grid__item,
+.card,
+.card-wrapper,
+.card-information,
+.header,
+.footer,
+.border-top,
+.border-bottom {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Define boundaries using background color shifts or whitespace */
+.card,
+.product-card {
+  background-color: rgba(26, 23, 20, 0.03); /* Subtle whitespace shift */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: var(--button-radius);
+}
+
+.card:hover,
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Header & Navigation Styles */
+.header-wrapper {
+  background-color: var(--color-warm-white) !important;
+  border-bottom: none !important;
+}
+
+.list-menu__item {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--color-ink-black) !important;
+}
+
+.list-menu__item:hover {
+  color: var(--color-signature-gold) !important;
+}
+
+/* ============ CTA Buttons & Forms ============ */
+/* Tannery Green applied STRICTLY to CTAs and buttons only. */
+/* Corner radius must be ROUND_FOUR (0.25rem) exactly. */
+.button,
+.button--primary,
+.shopify-payment-button__button,
+.cart__checkout-button,
+.newsletter-form__button,
+.shopify-challenge__button {
+  background-color: var(--color-tannery-green) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: var(--button-radius) !important;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  padding: 12px 28px !important;
+  transition: background-color 0.25s, transform 0.25s !important;
+}
+
+.button:hover,
+.button--primary:hover,
+.shopify-payment-button__button:hover,
+.cart__checkout-button:hover,
+.newsletter-form__button:hover,
+.shopify-challenge__button:hover {
+  background-color: var(--color-tannery-green-dark) !important;
+  transform: scale(1.02);
+}
+
+/* Secondary Buttons */
+.button--secondary {
+  background-color: transparent !important;
+  color: var(--color-ink-black) !important;
+  border: 1px solid var(--color-ink-black) !important;
+  border-radius: var(--button-radius) !important;
+}
+
+.button--secondary:hover {
+  background-color: var(--color-ink-black) !important;
+  color: var(--color-warm-white) !important;
+}
+
+/* ============ Product Listings & Badges ============ */
+.price {
+  color: var(--color-ink-black);
+}
+
+.badge {
+  background-color: var(--color-signature-gold) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: var(--button-radius) !important;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+/* ============ Dark Surfaces / Hero Contexts ============ */
+/* Editorial blocks featuring a dark aesthetic */
+.theme-dark,
+.hero-dark-surface,
+.footer {
+  background-color: var(--color-ink-black) !important;
+  color: var(--color-warm-white) !important;
+}
+
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.hero-dark-surface h1,
+.hero-dark-surface h2,
+.footer h1,
+.footer h2,
+.footer h3 {
+  color: var(--color-warm-white) !important;
+}
+
+.footer__localization-btn {
+  background-color: rgba(245, 240, 232, 0.05) !important;
+  border: none !important;
+  border-radius: var(--button-radius) !important;
+  color: var(--color-warm-white) !important;
+}
+
+/* ============ Product Care Guide Page Styles ============ */
+.care-guide-section {
+  padding: 80px 20px;
+  background-color: var(--color-warm-white);
+  color: var(--color-ink-black);
+}
+
+.care-guide-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.care-guide-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.care-guide-header .eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-signature-gold);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.care-guide-header h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(38px, 6vw, 64px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-ink-black);
+  margin-bottom: 24px;
+}
+
+.care-guide-header p.intro {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-stone-grey);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* The Three Core Rules - Tonal background shifts without 1px lines */
+.care-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+  .care-rules-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.care-rule-card {
+  background-color: rgba(26, 23, 20, 0.03); /* Tonal boundary shift */
+  padding: 36px 30px;
+  border-radius: var(--button-radius);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.care-rule-card:hover {
+  transform: translateY(-4px);
+}
+
+.care-rule-card .rule-num {
+  font-family: var(--font-specs);
+  font-size: 14px;
+  color: var(--color-signature-gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.care-rule-card h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  margin-bottom: 14px;
+  color: var(--color-ink-black);
+}
+
+.care-rule-card p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-stone-grey);
+}
+
+/* Patina Simulator Widget */
+.patina-widget-box {
+  background-color: rgba(26, 23, 20, 0.02);
+  padding: 48px clamp(20px, 5vw, 60px);
+  border-radius: var(--button-radius);
+  margin-bottom: 80px;
+}
+
+.patina-widget-box h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 36px);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.patina-widget-box p.widget-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-stone-grey);
+  text-align: center;
+  margin-bottom: 36px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.patina-simulator {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.simulator-images {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border-radius: var(--button-radius);
+  overflow: hidden;
+  background-color: var(--color-ink-black);
+}
+
+.sim-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  transition: opacity 0.05s ease-out;
+}
+
+.patina-grain {
+  opacity: 0;
+  z-index: 2;
+}
+
+.new-grain {
+  z-index: 1;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.slider-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-stone-grey);
+  font-weight: 500;
+  width: 90px;
+}
+
+.slider-label.label-patina {
+  text-align: right;
+}
+
+.patina-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: rgba(26, 23, 20, 0.1);
+  outline: none;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.patina-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-signature-gold);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.patina-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.patina-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-signature-gold);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.patina-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Interactive Trouble Tabs */
+.trouble-tabs-box {
+  margin-bottom: 80px;
+}
+
+.trouble-tabs-box h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 36px);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.tab-btn {
+  font-family: var(--font-body);
+  background: rgba(26, 23, 20, 0.03);
+  color: var(--color-ink-black);
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--button-radius);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tab-btn:hover {
+  background: rgba(26, 23, 20, 0.06);
+}
+
+.tab-btn.active {
+  background: var(--color-ink-black);
+  color: var(--color-warm-white);
+}
+
+.tabs-content {
+  background-color: rgba(26, 23, 20, 0.03);
+  border-radius: var(--button-radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-pane {
+  display: none;
+  padding: 40px clamp(20px, 6vw, 48px);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.tab-pane h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  margin-bottom: 12px;
+  color: var(--color-signature-gold);
+}
+
+.tab-pane p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-ink-black);
+  margin-bottom: 18px;
+}
+
+.tab-pane .specs-box {
+  font-family: var(--font-specs);
+  font-size: 12px;
+  color: var(--color-stone-grey);
+  margin-top: 14px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Specifications Table styling */
+.spec-instructions {
+  margin-top: 60px;
+}
+
+.spec-instructions h2 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.spec-table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: none; /* No line layout rule */
+  background-color: rgba(26, 23, 20, 0.02);
+  margin-bottom: 6px;
+  border-radius: var(--button-radius);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.spec-table-row span:first-child {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-ink-black);
+}
+
+.spec-table-row span:last-child {
+  font-family: var(--font-specs);
+  font-size: 13px;
+  color: var(--color-signature-gold);
+}
+
+.card-image-wrapper {
+  aspect-ratio: 21/9;
+  overflow: hidden;
+  border-radius: var(--button-radius);
+  margin-bottom: 24px;
+  background-color: rgba(26, 23, 20, 0.05);
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.care-rule-card:hover .card-image-wrapper img {
+  transform: scale(1.05);
+}
+
+/* ============ Our Commitment Page Styles ============ */
+.commitment-section {
+  padding: 80px 20px;
+  background-color: var(--color-warm-white);
+  color: var(--color-ink-black);
+}
+
+.commitment-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.commitment-hero {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.commitment-hero .eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-signature-gold);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.commitment-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(34px, 5.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-ink-black);
+  max-width: 800px;
+  margin: 0 auto 24px auto;
+}
+
+.commitment-hero p.intro {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-stone-grey);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Editorial Split Layout */
+.commitment-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+  .commitment-split {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  
+  .commitment-split.image-right {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+}
+
+.commitment-image-wrapper {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--button-radius);
+  background-color: rgba(26, 23, 20, 0.05);
+}
+
+.commitment-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.commitment-split:hover .commitment-image-wrapper img {
+  transform: scale(1.03);
+}
+
+.commitment-text-block {
+  padding: 0 clamp(10px, 2vw, 40px);
+}
+
+.commitment-text-block h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.commitment-text-block p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-stone-grey);
+  margin-bottom: 24px;
+}
+
+.commitment-text-block .signature {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--color-signature-gold);
+  margin-top: 16px;
+  display: block;
+}
+
+/* Credentials Grid */
+.commitment-credentials {
+  background-color: rgba(26, 23, 20, 0.02);
+  padding: 80px clamp(20px, 6vw, 60px);
+  border-radius: var(--button-radius);
+  margin-bottom: 80px;
+}
+
+.commitment-credentials h2.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 36px);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .credentials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.credential-card {
+  background-color: var(--color-warm-white);
+  padding: 40px 32px;
+  border-radius: var(--button-radius);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.credential-card:hover {
+  transform: translateY(-4px);
+}
+
+.credential-card .cred-code {
+  font-family: var(--font-specs);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--color-signature-gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.credential-card h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: var(--color-ink-black);
+}
+
+.credential-card p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-stone-grey);
+  margin: 0;
+}
+
+/* Foot Callout Section */
+.commitment-callout {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--color-ink-black);
+  color: var(--color-warm-white);
+  border-radius: var(--button-radius);
+}
+
+.commitment-callout h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--color-warm-white) !important;
+  margin-bottom: 16px;
+}
+
+.commitment-callout p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(245, 240, 232, 0.7);
+  max-width: 500px;
+  margin: 0 auto 32px auto;
+  line-height: 1.6;
+}
+
+.commitment-callout .btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+

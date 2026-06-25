@@ -1,0 +1,118 @@
+﻿{%- assign uid = section.id -%}
+
+<section class="commitment-section" id="commitment-{{ uid }}">
+  <div class="commitment-container">
+
+    <header class="commitment-hero">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Our Promise' }}</p>
+      <h1>{{ section.settings.title | default: 'We own the making, so we own the standard.' }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="commitment-split">
+      <div class="commitment-image-wrapper">
+        <img src="{{ 'care_workshop_detail.png' | asset_url }}" alt="Full-grain leather pieces and hand tools on a wooden workshop workbench" width="800" height="600" loading="lazy">
+      </div>
+      <div class="commitment-text-block">
+        <h2>{{ section.settings.story_title | default: 'From hide to hand.' }}</h2>
+        <p>{{ section.settings.story_text | default: 'Since 1991, we have worked directly from the raw hide to the finished piece. By running our tannery and workshop together, we control every detail. We do not source pre-made materials or outsource our stitching. Every bag and wallet is built at source by people who have spent decades learning how leather behaves.' }}</p>
+        <span class="signature">The Pargal Family</span>
+      </div>
+    </div>
+
+    <div class="commitment-credentials">
+      <h2 class="section-title">{{ section.settings.credentials_title | default: 'Audited and Certified at Source' }}</h2>
+      <div class="credentials-grid">
+
+        <div class="credential-card">
+          <div class="card-image-wrapper">
+            <img src="{{ 'tannery_drums.png' | asset_url }}" alt="Tanning wooden drums inside our tannery" width="800" height="533" loading="lazy">
+          </div>
+          <span class="cred-code">LWG GOLD AUDITED</span>
+          <h3>Environmental Stewardship</h3>
+          <p>Our tannery is audited by the Leather Working Group, achieving their Gold standard for environmental performance. We manage water reuse and energy consumption at source, making sure our impact is handled responsibly.</p>
+        </div>
+
+        <div class="credential-card">
+          <div class="card-image-wrapper">
+            <img src="{{ 'stitching_detail.png' | asset_url }}" alt="Craftsman hands hand-stitching leather hide" width="800" height="533" loading="lazy">
+          </div>
+          <span class="cred-code">SEDEX COMPLIANT</span>
+          <h3>Ethical Workspaces</h3>
+          <p>We ensure fair wages, safe workspaces, and ethical labor standards across our entire supply chain. Our facilities are audited regularly to meet strict global compliance metrics.</p>
+        </div>
+
+        <div class="credential-card">
+          <div class="card-image-wrapper">
+            <img src="{{ 'heritage_tools.png' | asset_url }}" alt="Aged brass stamps and tools on workshop bench" width="800" height="533" loading="lazy">
+          </div>
+          <span class="cred-code">SINCE 1991</span>
+          <h3>35 Years of Mastery</h3>
+          <p>Established in 1991, our family-run tannery and workshop combine over three decades of mastery. We pass down the techniques of splitting, skiving, and stitching through generations.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="commitment-callout">
+      <h2>Made for living.</h2>
+      <p>Discover our full-grain leather pieces built for a lifetime of use, or read our guide on how to care for them.</p>
+      <div class="btn-group">
+        <a href="/collections/all" class="button button--primary">Shop Now</a>
+        <a href="/pages/care-guide" class="button button--secondary" style="color: #fff !important; border-color: #fff !important;">Care Guide</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Commitment",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Promise"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "We own the making, so we own the standard."
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction paragraph",
+      "default": "We believe that the only way to guarantee how something is built is to build it ourselves. From the initial tanning process to the final stitch, every step happens under our own roof."
+    },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Story Title",
+      "default": "From hide to hand."
+    },
+    {
+      "type": "textarea",
+      "id": "story_text",
+      "label": "Story Text",
+      "default": "Since 1991, we have worked directly from the raw hide to the finished piece. By running our tannery and workshop together, we control every detail. We do not source pre-made materials or outsource our stitching. Every bag and wallet is built at source by people who have spent decades learning how leather behaves."
+    },
+    {
+      "type": "text",
+      "id": "credentials_title",
+      "label": "Credentials Title",
+      "default": "Audited and Certified at Source"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Commitment"
+    }
+  ]
+}
+{% endschema %}

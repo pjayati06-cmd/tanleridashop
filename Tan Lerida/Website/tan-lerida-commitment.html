@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Our Commitment — Tan Lerida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tan-lerida-custom.css">
+<style>
+  /* Local wrapper style override to make sure it looks like a full page in the preview */
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-warm-white);
+  }
+  nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px clamp(16px, 4vw, 56px);
+    background-color: var(--color-warm-white);
+    box-shadow: 0 1px 0 rgba(42,31,21,.14);
+  }
+  nav .brand {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    line-height: 1;
+    color: var(--color-ink-black);
+    text-decoration: none;
+  }
+  nav .brand em {
+    font-style: italic;
+    font-weight: 500;
+  }
+  .nav-pill {
+    display: flex;
+    background: rgba(42,31,21,.05);
+    border-radius: 999px;
+    padding: 6px;
+    gap: 2px;
+  }
+  .nav-pill a {
+    color: var(--color-stone-grey);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: .25s;
+  }
+  .nav-pill a:hover, .nav-pill a.active {
+    color: var(--color-ink-black);
+    background: rgba(42,31,21,.08);
+  }
+  .nav-shop {
+    background: var(--color-tannery-green);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 999px;
+    transition: .25s;
+    text-decoration: none;
+  }
+  .nav-shop:hover {
+    background: var(--color-tannery-green-dark);
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+  <a class="brand" href="#">Tan <em>Lerida</em></a>
+  <div class="nav-pill">
+    <a href="#">Man</a>
+    <a href="#">Woman</a>
+    <a href="#">Lifestyle</a>
+    <a href="./tan-lerida-care-guide.html">Care</a>
+    <a href="#" class="active">Commitment</a>
+  </div>
+  <a class="nav-shop" href="#">Shop</a>
+</nav>
+
+<!-- Commitment Section -->
+<section class="commitment-section">
+  <div class="commitment-container">
+    
+    <!-- Hero Block -->
+    <header class="commitment-hero">
+      <p class="eyebrow">Our Promise</p>
+      <h1>We own the making, so we own the standard.</h1>
+      <p class="intro">We believe that the only way to guarantee how something is built is to build it ourselves. From the initial tanning process to the final stitch, every step happens under our own roof.</p>
+    </header>
+
+    <!-- The Story of Traceability (Hide to Hand) -->
+    <div class="commitment-split">
+      <div class="commitment-image-wrapper">
+        <img src="./assets/care_workshop_detail.png" alt="Full-grain leather pieces and hand tools on a wooden workshop workbench" loading="lazy">
+      </div>
+      <div class="commitment-text-block">
+        <h2>From hide to hand.</h2>
+        <p>Since 1991, we have worked directly from the raw hide to the finished piece. By running our tannery and workshop together, we control every detail. We do not source pre-made materials or outsource our stitching. Every bag and wallet is built at source by people who have spent decades learning how leather behaves. The full-grain hides we finish are designed to soften with use, shaped by your daily habits, growing a rich patina that is unique to you. This is why we make things to live in, not just to look at.</p>
+        <span class="signature">The Pargal Family</span>
+      </div>
+    </div>
+
+    <!-- Credentials Grid (The Floor of Our Promise) -->
+    <div class="commitment-credentials">
+      <h2 class="section-title">Audited & Certified at Source</h2>
+      <div class="credentials-grid">
+        
+        <!-- Credential 1: LWG Gold -->
+        <div class="credential-card">
+          <div class="card-image-wrapper">
+            <img src="./assets/tannery_drums.png" alt="Tanning wooden drums inside our tannery" loading="lazy">
+          </div>
+          <span class="cred-code">LWG GOLD AUDITED</span>
+          <h3>Environmental Stewardship</h3>
+          <p>Our tannery is audited by the Leather Working Group, achieving their Gold standard for environmental performance. We manage water reuse and energy consumption at source, making sure our impact is handled responsibly.</p>
+        </div>
+
+        <!-- Credential 2: SEDEX -->
+        <div class="credential-card">
+          <div class="card-image-wrapper">
+            <img src="./assets/stitching_detail.png" alt="Craftsman hands hand-stitching leather hide" loading="lazy">
+          </div>
+          <span class="cred-code">SEDEX COMPLIANT</span>
+          <h3>Ethical Workspaces</h3>
+          <p>We ensure fair wages, safe workspaces, and ethical labor standards across our entire supply chain. Our facilities are audited regularly to meet strict global compliance metrics.</p>
+        </div>
+
+        <!-- Credential 3: 35 Years -->
+        <div class="credential-card">
+          <div class="card-image-wrapper">
+            <img src="./assets/heritage_tools.png" alt="Aged brass stamps and tools on workshop bench" loading="lazy">
+          </div>
+          <span class="cred-code">SINCE 1991</span>
+          <h3>35 Years of Mastery</h3>
+          <p>Established in 1991, our family-run tannery and workshop combine over three decades of mastery. We pass down the techniques of splitting, skiving, and stitching through generations.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Foot Callout Section -->
+    <div class="commitment-callout">
+      <h2>Made for living.</h2>
+      <p>Discover our full-grain leather pieces built for a lifetime of use, or read our guide on how to care for them.</p>
+      <div class="btn-group">
+        <a href="#" class="button button--primary">Shop Now</a>
+        <a href="./tan-lerida-care-guide.html" class="button button--secondary" style="color: #fff !important; border-color: #fff !important;">Care Guide</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

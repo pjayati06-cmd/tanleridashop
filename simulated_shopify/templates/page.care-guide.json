@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "care-guide",
+      "settings": {
+        "eyebrow": "At source",
+        "title": "Made for living.",
+        "intro": "Full-grain leather is not meant to be preserved under glass. We shape it by hand in our workshop using hides finished at our 35-year-old tannery, so it can live with you. It will soften where you hold it, shaped by your daily habits, and gather a rich patina that tells the story of everywhere you've been."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
