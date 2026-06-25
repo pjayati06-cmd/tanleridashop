@@ -1,0 +1,52 @@
+{
+  "hosting": {
+    "public": "Tan Lerida/Website",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/*.liquid",
+      "package.json",
+      "package-lock.json",
+      "firebase-app.js"
+    ],
+    "rewrites": [
+      {
+        "source": "/care-guide",
+        "destination": "/tan-lerida-care-guide.html"
+      },
+      {
+        "source": "/commitment",
+        "destination": "/tan-lerida-commitment.html"
+      },
+      {
+        "source": "/atelier",
+        "destination": "/tan-lerida-hero-atelier.html"
+      },
+      {
+        "source": "/hero",
+        "destination": "/tan-lerida-homepage.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.css",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          }
+        ]
+      }
+    ]
+  }
+}

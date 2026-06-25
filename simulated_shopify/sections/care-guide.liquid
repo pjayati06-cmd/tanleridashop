@@ -1,16 +1,8 @@
-{% comment %}
-  Tan Lerida — Product Care Guide Section
-  HOW TO ADD:
-  1. Sections > Add a new section > name it "care-guide" > paste this file > Save
-  2. Templates > page.care-guide.json should load this section
-{% endcomment %}
-
-{%- assign uid = section.id -%}
+﻿{%- assign uid = section.id -%}
 
 <section class="care-guide-section" id="care-{{ uid }}">
   <div class="care-guide-container">
-    
-    <!-- Editorial Header -->
+
     <header class="care-guide-header">
       <p class="eyebrow">{{ section.settings.eyebrow | default: 'At source' }}</p>
       <h1>{{ section.settings.title | default: 'Made for living.' }}</h1>
@@ -19,11 +11,10 @@
       {%- endif -%}
     </header>
 
-    <!-- The Three Core Rules -->
     <div class="care-rules-grid">
       <div class="care-rule-card">
         <div class="card-image-wrapper">
-          <img src="{{ 'care_water_wipe.png' | asset_url }}" alt="Wiping water droplets from tan leather hide" loading="lazy">
+          <img src="{{ 'care_water_wipe.png' | asset_url }}" alt="Wiping water droplets from tan leather hide" width="800" height="533" loading="lazy">
         </div>
         <span class="rule-num">RULE 01</span>
         <h3>Keep it dry</h3>
@@ -31,7 +22,7 @@
       </div>
       <div class="care-rule-card">
         <div class="card-image-wrapper">
-          <img src="{{ 'care_storage_dustbag.png' | asset_url }}" alt="Tan leather goods in a cream cotton dust bag" loading="lazy">
+          <img src="{{ 'care_storage_dustbag.png' | asset_url }}" alt="Tan leather goods in a cream cotton dust bag" width="800" height="533" loading="lazy">
         </div>
         <span class="rule-num">RULE 02</span>
         <h3>Let it breathe</h3>
@@ -39,7 +30,7 @@
       </div>
       <div class="care-rule-card">
         <div class="card-image-wrapper">
-          <img src="{{ 'care_conditioner_wax.png' | asset_url }}" alt="Organic beeswax conditioner tin beside tan leather" loading="lazy">
+          <img src="{{ 'care_conditioner_wax.png' | asset_url }}" alt="Organic beeswax conditioner tin beside tan leather" width="800" height="533" loading="lazy">
         </div>
         <span class="rule-num">RULE 03</span>
         <h3>Condition with care</h3>
@@ -47,15 +38,13 @@
       </div>
     </div>
 
-    <!-- Interactive Patina Ageing Simulator -->
     <div class="patina-widget-box">
       <h2>The Patina Simulator</h2>
       <p class="widget-desc">Move the slider to see how full-grain leather changes over five years of living. The hide softens and gathers a rich, dark character.</p>
-      
       <div class="patina-simulator">
         <div class="simulator-images">
-          <img src="{{ 'leather_new_grain.png' | asset_url }}" class="sim-img new-grain" alt="New full-grain leather grain">
-          <img src="{{ 'leather_patina_grain.png' | asset_url }}" class="sim-img patina-grain" id="patinaImage-{{ uid }}" alt="Full-grain leather with five years of aged patina">
+          <img src="{{ 'leather_new_grain.png' | asset_url }}" class="sim-img new-grain" alt="New full-grain leather grain" width="440" height="220">
+          <img src="{{ 'leather_patina_grain.png' | asset_url }}" class="sim-img patina-grain" width="440" height="220" id="patinaImage-{{ uid }}" alt="Full-grain leather with five years of aged patina">
         </div>
         <div class="slider-container">
           <span class="slider-label label-new">New hide</span>
@@ -65,46 +54,32 @@
       </div>
     </div>
 
-    <!-- Interactive Troubleshooting Tabs -->
     <div class="trouble-tabs-box">
       <h2>Troubleshooting Guide</h2>
-      
       <div class="tabs-nav">
         <button class="tab-btn active" data-tab="scratched-{{ uid }}">Scratched</button>
         <button class="tab-btn" data-tab="wet-{{ uid }}">Wet</button>
         <button class="tab-btn" data-tab="dusty-{{ uid }}">Dusty</button>
       </div>
-      
       <div class="tabs-content">
-        <!-- Scratched -->
         <div class="tab-pane active" id="scratched-{{ uid }}">
-          <h3>Scratches & Marks</h3>
-          <p>A mark is not a defect; it is a sign that your leather is living. For light fingernail marks, simply rub the surface firmly with your thumb. The warmth and natural oils from your hand will distribute the wax and soften the mark back into the grain.</p>          <div class="specs-box">
-            <span>METHOD: BUFF WITH NATURAL SKIN OILS</span>
-          </div>
+          <h3>Scratches and Marks</h3>
+          <p>A mark is not a defect; it is a sign that your leather is living. For light fingernail marks, simply rub the surface firmly with your thumb. The warmth and natural oils from your hand will distribute the wax and soften the mark back into the grain.</p>
+          <div class="specs-box"><span>METHOD: BUFF WITH NATURAL SKIN OILS</span></div>
         </div>
-        
-        <!-- Wet -->
         <div class="tab-pane" id="wet-{{ uid }}">
           <h3>Liquid Spills</h3>
           <p>Do not panic, and do not use a hairdryer. Blot the water immediately with a clean dry cloth. Hang your garment or place your bag in a cool, ventilated room. Allow it to air-dry naturally before applying conditioner.</p>
-          <div class="specs-box">
-            <span>DRYING TIME: 24 HOURS (NATURAL AIRFLOW)</span>
-          </div>
+          <div class="specs-box"><span>DRYING TIME: 24 HOURS (NATURAL AIRFLOW)</span></div>
         </div>
-        
-        <!-- Dusty -->
         <div class="tab-pane" id="dusty-{{ uid }}">
-          <h3>Dust & Dirt</h3>
+          <h3>Dust and Dirt</h3>
           <p>Wipe the surface weekly with a dry, lint-free cloth to remove surface dust. For deeper clean, use a damp cloth with mild vegetable glycerin soap. Always test a small spot first, and let it dry completely.</p>
-          <div class="specs-box">
-            <span>CLEANING INTERVAL: WEEKLY OR POST-TRAVEL</span>
-          </div>
+          <div class="specs-box"><span>CLEANING INTERVAL: WEEKLY OR POST-TRAVEL</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Specifications Table (transparency specs) -->
     <div class="spec-instructions">
       <h2>Care Specifications</h2>
       <div class="spec-table-row">
@@ -117,7 +92,7 @@
       </div>
       <div class="spec-table-row">
         <span>Storage Temperature</span>
-        <span>15°C – 25°C</span>
+        <span>15C to 25C</span>
       </div>
       <div class="spec-table-row">
         <span>Air Drying Time</span>
@@ -134,36 +109,25 @@
 
 <script>
 (function() {
-  // Patina Slider
-  const slider = document.getElementById('patinaSlider-{{ uid }}');
-  const patinaImg = document.getElementById('patinaImage-{{ uid }}');
+  var slider = document.getElementById('patinaSlider-{{ uid }}');
+  var patinaImg = document.getElementById('patinaImage-{{ uid }}');
   if (slider && patinaImg) {
     slider.addEventListener('input', function() {
       patinaImg.style.opacity = this.value / 100;
     });
   }
-
-  // Troubleshooting Tabs
-  const container = document.getElementById('care-{{ uid }}');
+  var container = document.getElementById('care-{{ uid }}');
   if (container) {
-    const tabBtns = container.querySelectorAll('.tab-btn');
-    const tabPanes = container.querySelectorAll('.tab-pane');
-    
-    tabBtns.forEach(btn => {
+    var tabBtns = container.querySelectorAll('.tab-btn');
+    var tabPanes = container.querySelectorAll('.tab-pane');
+    tabBtns.forEach(function(btn) {
       btn.addEventListener('click', function() {
-        // Remove active class from buttons and panes
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabPanes.forEach(p => p.classList.remove('active'));
-        
-        // Add active to current button
+        tabBtns.forEach(function(b) { b.classList.remove('active'); });
+        tabPanes.forEach(function(p) { p.classList.remove('active'); });
         this.classList.add('active');
-        
-        // Add active to target pane
-        const targetId = this.getAttribute('data-tab');
-        const pane = container.querySelector('#' + targetId);
-        if (pane) {
-          pane.classList.add('active');
-        }
+        var targetId = this.getAttribute('data-tab');
+        var pane = container.querySelector('#' + targetId);
+        if (pane) { pane.classList.add('active'); }
       });
     });
   }
@@ -190,7 +154,7 @@
       "type": "textarea",
       "id": "intro",
       "label": "Introduction paragraph",
-      "default": "Full-grain leather is not meant to be preserved under glass. We shape it by hand in our workshop using hides finished at our 35-year-old tannery, so it can live with you. It will soften where you hold it, shaped by your daily habits, and gather a rich patina that tells the story of everywhere you've been."
+      "default": "Full-grain leather is not meant to be preserved under glass. We shape it by hand in our workshop using hides finished at our 35-year-old tannery, so it can live with you."
     }
   ],
   "presets": [
