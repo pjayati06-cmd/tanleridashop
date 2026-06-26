@@ -1,0 +1,265 @@
+{% comment %}
+  TAN LERIDA — CUSTOM HEADER
+  -------------------------------------------------
+  SETUP:
+  1. Shopify Admin → Online Store → Themes
+  2. Click "..." next to your theme → Edit code
+  3. Open sections/header.liquid
+  4. SELECT ALL the existing code → COPY it into a plain text file
+     on your computer (this is your backup)
+  5. DELETE everything in header.liquid
+  6. PASTE this entire file → Save
+  7. Go to Customize → click Header in the left panel
+  8. All fields (logo, brand name, menu, button) are in the side panel
+  
+  NAVIGATION:
+  - The menu links come from Settings → Navigation
+  - By default it uses "Main menu". Change it in the side panel.
+{% endcomment %}
+
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* kill any theme-level header spacing */
+  .shopify-section-group-header-group { margin:0 !important; padding:0 !important; }
+
+  #tl-header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(16px,4vw,56px);
+    font-family:'Inter',sans-serif;
+    transition:background .35s, backdrop-filter .35s;
+  }
+  #tl-header.scrolled{
+    background:rgba(23,17,12,.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+  }
+
+  /* ---- BRAND / LOGO ---- */
+  #tl-header .tl-brand{
+    display:flex;align-items:center;gap:10px;
+    text-decoration:none;
+  }
+  #tl-header .tl-brand-img{
+    height:32px;width:auto;display:block;
+  }
+  #tl-header .tl-brand-text{
+    color:#f4ede2;font-size:26px;line-height:1;letter-spacing:.01em;
+    font-family:'Cormorant Garamond',serif;font-weight:400;
+  }
+  #tl-header .tl-brand-text em{font-style:italic;font-weight:500;}
+
+  /* ---- PILL NAV (desktop) ---- */
+  #tl-header .tl-pill{
+    display:none;position:absolute;left:50%;transform:translateX(-50%);
+    background:rgba(244,237,226,.12);backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(244,237,226,.22);border-radius:999px;
+    padding:6px;gap:2px;align-items:center;
+  }
+  #tl-header .tl-pill a{
+    color:rgba(244,237,226,.72);text-decoration:none;font-size:13px;font-weight:500;
+    padding:8px 16px;border-radius:999px;transition:.25s;white-space:nowrap;
+  }
+  #tl-header .tl-pill a:hover{background:rgba(244,237,226,.16);color:#f4ede2;}
+
+  /* ---- SHOP BUTTON (desktop) ---- */
+  #tl-header .tl-shop{
+    display:none;background:#f4ede2;color:#1c130b;border:none;cursor:pointer;
+    font-family:'Inter',sans-serif;
+    font-size:13px;font-weight:600;padding:11px 24px;border-radius:999px;
+    transition:.25s;text-decoration:none;
+  }
+  #tl-header .tl-shop:hover{background:#fff;transform:translateY(-1px);}
+
+  /* ---- BURGER (mobile) ---- */
+  #tl-header .tl-burger{
+    display:flex;flex-direction:column;gap:5px;
+    background:none;border:none;cursor:pointer;padding:6px;
+  }
+  #tl-header .tl-burger span{
+    width:22px;height:1.5px;background:#f4ede2;display:block;
+    transition:transform .3s, opacity .3s;
+  }
+  #tl-header .tl-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  #tl-header .tl-burger.open span:nth-child(2){opacity:0;}
+  #tl-header .tl-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  @media(min-width:900px){
+    #tl-header .tl-pill{display:flex;}
+    #tl-header .tl-shop{display:inline-block;}
+    #tl-header .tl-burger{display:none;}
+  }
+
+  /* ---- MOBILE DRAWER ---- */
+  #tl-drawer{
+    position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;
+    background:rgba(23,17,12,.96);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    opacity:0;pointer-events:none;transition:opacity .35s;
+  }
+  #tl-drawer.open{opacity:1;pointer-events:auto;}
+  #tl-drawer a{
+    color:#f4ede2;text-decoration:none;font-family:'Cormorant Garamond',serif;
+    font-size:32px;font-weight:400;font-style:italic;
+    padding:10px 20px;transition:opacity .2s;
+  }
+  #tl-drawer a:hover{opacity:.7;}
+  @media(min-width:900px){#tl-drawer{display:none !important;}}
+
+  /* ---- SPACER so page content isn't hidden behind fixed header ---- */
+  #tl-header-spacer{height:72px;}
+</style>
+
+{%- assign menu = linklists[section.settings.menu] -%}
+
+<!-- spacer to push page content below the fixed header -->
+<div id="tl-header-spacer"></div>
+
+<!-- mobile drawer -->
+<div id="tl-drawer">
+  {%- for link in menu.links -%}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+  {%- endfor -%}
+  {%- if section.settings.cta_label != blank -%}
+    <a href="{{ section.settings.cta_url }}" style="margin-top:16px;font-family:'Inter',sans-serif;font-size:14px;font-style:normal;font-weight:600;background:#b06a36;padding:14px 30px;border-radius:999px;">
+      {{ section.settings.cta_label }}
+    </a>
+  {%- endif -%}
+</div>
+
+<header id="tl-header">
+  <!-- brand -->
+  <a class="tl-brand" href="{{ routes.root_url }}">
+    {%- if section.settings.logo -%}
+      <img
+        class="tl-brand-img"
+        src="{{ section.settings.logo | image_url: height: 64 }}"
+        alt="{{ shop.name }}"
+        height="32"
+        loading="eager"
+      >
+    {%- endif -%}
+    {%- if section.settings.show_brand_text -%}
+      <span class="tl-brand-text">{{ section.settings.brand_line1 }} <em>{{ section.settings.brand_line2 }}</em></span>
+    {%- endif -%}
+  </a>
+
+  <!-- pill nav -->
+  <nav class="tl-pill">
+    {%- for link in menu.links -%}
+      <a href="{{ link.url }}"{% if link.active %} style="color:#f4ede2"{% endif %}>
+        {{ link.title }}
+      </a>
+    {%- endfor -%}
+  </nav>
+
+  <!-- shop / CTA button -->
+  {%- if section.settings.cta_label != blank -%}
+    <a class="tl-shop" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+  {%- endif -%}
+
+  <!-- mobile burger -->
+  <button class="tl-burger" id="tl-burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<script>
+(function(){
+  /* scroll background */
+  var hdr = document.getElementById('tl-header');
+  if(hdr){
+    window.addEventListener('scroll', function(){
+      hdr.classList.toggle('scrolled', window.scrollY > 40);
+    }, {passive:true});
+  }
+
+  /* mobile drawer toggle */
+  var burger = document.getElementById('tl-burger');
+  var drawer = document.getElementById('tl-drawer');
+  if(burger && drawer){
+    burger.addEventListener('click', function(){
+      burger.classList.toggle('open');
+      drawer.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    });
+    /* close drawer when a link is tapped */
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        burger.classList.remove('open');
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "tl-header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo & brand name"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_text",
+      "label": "Show brand text next to logo",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_line1",
+      "label": "Brand text — first word",
+      "default": "Tan"
+    },
+    {
+      "type": "text",
+      "id": "brand_line2",
+      "label": "Brand text — second word (italic)",
+      "default": "Lerida"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu",
+      "info": "Manage links in Settings → Navigation"
+    },
+    {
+      "type": "header",
+      "content": "Button (right side)"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button text",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button link"
+    }
+  ]
+}
+{% endschema %}
