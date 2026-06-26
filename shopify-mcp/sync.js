@@ -21,7 +21,9 @@ function loadEnv() {
           if (parts.length >= 2) {
             const key = parts[0].trim();
             const val = parts.slice(1).join('=').trim().replace(/^['"]|['"]$/g, '');
-            process.env[key] = val;
+            if (process.env[key] === undefined) {
+              process.env[key] = val;
+            }
           }
         }
       }

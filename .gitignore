@@ -43,5 +43,9 @@ firebase-debug.log
 # Firebase Cache
 .firebase/
 
+# Local Shopify Simulation
+simulated_shopify/
 
-
+# Clean Repo Utility
+clean_repo.py
+repository_hygiene_report.md
