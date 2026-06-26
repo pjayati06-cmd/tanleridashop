@@ -1,0 +1,321 @@
+{%- comment -%}
+  TAN LERIDA — HERO SECTION (editable version)
+  ---------------------------------------------
+  This is a real Shopify SECTION, not a Custom Liquid block.
+  That's what unlocks the sidebar controls in the theme customizer:
+  text fields, image pickers, a button link, and colors.
+
+  HOW TO INSTALL
+  1. Shopify Admin > Online Store > Themes > your theme > Edit code
+  2. In the "Sections" folder, click "Add a new section"
+  3. Name it: tan-lerida-hero   (it will save as tan-lerida-hero.liquid)
+  4. Delete the placeholder content it gives you, paste this whole file in, Save
+  5. Go to Customize (theme editor) on the page you want it on
+  6. Click "Add section", scroll to find "Tan Lerida Hero", add it
+  7. Click into it — you'll see fields for headline, images, button, colors
+  8. If you currently have the OLD Custom Liquid block on the page, remove it
+     so you don't have the hero twice
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+{%- assign img_base = section.settings.image_base -%}
+{%- assign img_reveal = section.settings.image_reveal -%}
+
+<style>
+  #tl-hero-{{ section.id }}{
+    --leather-black:{{ section.settings.bg_color }};
+    --cognac:{{ section.settings.accent_color }};
+    --cognac-dark:{{ section.settings.accent_color_dark }};
+    --cream:{{ section.settings.text_color }};
+    --cream-muted:{{ section.settings.text_color }};
+    --spot-r:{{ section.settings.spotlight_radius }}px;
+
+    {%- if img_base %}
+    --img-base:url('{{ img_base | image_url: width: 2400 }}');
+    {%- else %}
+    --img-base:none;
+    {%- endif %}
+    {%- if img_reveal %}
+    --img-reveal:url('{{ img_reveal | image_url: width: 2400 }}');
+    {%- else %}
+    --img-reveal:none;
+    {%- endif %}
+
+    position:relative;
+    width:100vw;left:50%;margin-left:-50vw;
+    height:100vh;height:100dvh;
+    overflow:hidden;background:var(--leather-black);
+    letter-spacing:-.01em;cursor:default;
+  }
+  #tl-hero-{{ section.id }} *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+  #tl-hero-{{ section.id }} .serif{font-family:'Cormorant Garamond',serif;}
+
+  #tl-hero-{{ section.id }} .layer{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;}
+  #tl-hero-{{ section.id }} .base{background-image:var(--img-base);z-index:10;animation:tl-kenburns 16s cubic-bezier(.16,1,.3,1) forwards;}
+  #tl-hero-{{ section.id }} .reveal{
+    background-image:var(--img-reveal);z-index:30;pointer-events:none;
+    -webkit-mask-image:radial-gradient(circle var(--spot-r) at -999px -999px,#000 0%,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%);
+            mask-image:radial-gradient(circle var(--spot-r) at -999px -999px,#000 0%,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%);
+    will-change:-webkit-mask-image,mask-image;
+  }
+  #tl-hero-{{ section.id }} .scrim{
+    position:absolute;inset:0;z-index:40;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(10,7,4,.55) 0%,rgba(10,7,4,0) 28%,rgba(10,7,4,0) 60%,rgba(10,7,4,.72) 100%),
+      radial-gradient(120% 80% at 50% 0%,rgba(10,7,4,.25),transparent 60%);
+  }
+
+  #tl-hero-{{ section.id }} .heading{
+    position:absolute;top:15%;left:0;right:0;z-index:50;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:0 20px;pointer-events:none;
+  }
+  #tl-hero-{{ section.id }} .heading h1{color:var(--cream);line-height:.92;}
+  #tl-hero-{{ section.id }} .l1{display:block;font-style:italic;font-weight:400;letter-spacing:-.02em;font-size:clamp(46px,9vw,116px);}
+  #tl-hero-{{ section.id }} .l2{display:block;font-weight:300;letter-spacing:-.04em;margin-top:-.06em;font-size:clamp(46px,9vw,116px);}
+  #tl-hero-{{ section.id }} .hint{margin-top:26px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,226,.55);font-weight:500;}
+
+  #tl-hero-{{ section.id }} .copy-left{position:absolute;bottom:56px;left:clamp(16px,4vw,56px);z-index:50;max-width:270px;display:none;}
+  #tl-hero-{{ section.id }} .copy-left p{font-size:14px;line-height:1.55;color:var(--cream-muted);opacity:.85;}
+  @media(min-width:640px){#tl-hero-{{ section.id }} .copy-left{display:block;}}
+
+  #tl-hero-{{ section.id }} .copy-right{
+    position:absolute;bottom:40px;left:20px;right:20px;z-index:50;
+    display:flex;flex-direction:column;align-items:flex-start;gap:18px;
+  }
+  #tl-hero-{{ section.id }} .copy-right p{font-size:13px;line-height:1.55;color:var(--cream-muted);opacity:.85;max-width:520px;}
+  #tl-hero-{{ section.id }} .cta{
+    background:var(--cognac);color:#fff;border:none;cursor:pointer;
+    font-size:14px;font-weight:500;padding:14px 30px;border-radius:999px;
+    transition:.25s;letter-spacing:.01em;text-decoration:none;display:inline-block;
+  }
+  #tl-hero-{{ section.id }} .cta:hover{background:var(--cognac-dark);transform:scale(1.03);box-shadow:0 10px 30px rgba(176,106,54,.35);}
+  #tl-hero-{{ section.id }} .cta:active{transform:scale(.97);}
+  @media(min-width:640px){
+    #tl-hero-{{ section.id }} .copy-right{left:auto;right:clamp(16px,4vw,56px);bottom:96px;max-width:280px;align-items:flex-end;text-align:right;}
+    #tl-hero-{{ section.id }} .copy-right p{font-size:14px;}
+  }
+
+  @keyframes tl-kenburns{from{transform:scale(1.12);}to{transform:scale(1);}}
+  @keyframes tl-reveal{from{opacity:0;transform:translateY(26px);filter:blur(10px);}to{opacity:1;transform:translateY(0);filter:blur(0);}}
+  @keyframes tl-fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  #tl-hero-{{ section.id }} .anim{opacity:0;animation-fill-mode:forwards;animation-timing-function:cubic-bezier(.16,1,.3,1);}
+  #tl-hero-{{ section.id }} .a-reveal{animation-name:tl-reveal;animation-duration:1.1s;}
+  #tl-hero-{{ section.id }} .a-fade{animation-name:tl-fadeUp;animation-duration:1s;}
+  @media(prefers-reduced-motion:reduce){
+    #tl-hero-{{ section.id }} .base{animation:none;}
+    #tl-hero-{{ section.id }} .anim{animation:none;opacity:1;}
+  }
+</style>
+
+<section class="hero" id="tl-hero-{{ section.id }}">
+  <div class="layer base"></div>
+  <div class="layer reveal" id="tl-reveal-{{ section.id }}"></div>
+  <div class="scrim"></div>
+
+  <div class="heading">
+    <h1>
+      <span class="l1 serif anim a-reveal" style="animation-delay:.25s">{{ section.settings.heading_line1 }}</span>
+      <span class="l2 anim a-reveal" style="animation-delay:.42s">{{ section.settings.heading_line2 }}</span>
+    </h1>
+    {%- if section.settings.hint_text != blank %}
+    <p class="hint anim a-fade" id="tl-hint-{{ section.id }}" style="animation-delay:.9s">{{ section.settings.hint_text }}</p>
+    {%- endif %}
+  </div>
+
+  {%- if section.settings.left_text != blank %}
+  <div class="copy-left anim a-fade" style="animation-delay:.7s">
+    <p>{{ section.settings.left_text }}</p>
+  </div>
+  {%- endif %}
+
+  <div class="copy-right anim a-fade" style="animation-delay:.85s">
+    {%- if section.settings.right_text != blank %}
+      <p>{{ section.settings.right_text }}</p>
+    {%- endif %}
+    {%- if section.settings.cta_text != blank %}
+      <a class="cta" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_text }}</a>
+    {%- endif %}
+  </div>
+</section>
+
+<script>
+(function(){
+  var R = {{ section.settings.spotlight_radius }};
+  var hero   = document.getElementById('tl-hero-{{ section.id }}');
+  var reveal = document.getElementById('tl-reveal-{{ section.id }}');
+  var hint   = document.getElementById('tl-hint-{{ section.id }}');
+  if(!hero || !reveal) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch= window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
+
+  var raw = {x:-999,y:-999}, pos = {x:-999,y:-999};
+  var rafId, autoOn = isTouch, t = 0;
+
+  function paint(x,y){
+    var m = 'radial-gradient(circle '+R+'px at '+x+'px '+y+'px,#000 0%,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%)';
+    reveal.style.webkitMaskImage = m;
+    reveal.style.maskImage = m;
+  }
+  function onMove(e){
+    var r = hero.getBoundingClientRect();
+    raw.x = e.clientX - r.left;
+    raw.y = e.clientY - r.top;
+  }
+  function onTouch(e){
+    if(e.touches && e.touches[0]){
+      var r = hero.getBoundingClientRect();
+      raw.x = e.touches[0].clientX - r.left;
+      raw.y = e.touches[0].clientY - r.top;
+      autoOn = false;
+    }
+  }
+  function autoSweep(){
+    t += 0.012;
+    var w = hero.clientWidth, h = hero.clientHeight;
+    raw.x = w*0.5 + Math.sin(t)*w*0.28;
+    raw.y = h*0.46 + Math.sin(t*1.6)*h*0.16;
+  }
+
+  if(reduce){
+    paint(hero.clientWidth*0.62, hero.clientHeight*0.5);
+    if(hint) hint.style.display='none';
+    return;
+  }
+
+  if(isTouch){
+    if(hint) hint.textContent = 'Drag to reveal the grain';
+    hero.addEventListener('touchmove', onTouch, {passive:true});
+  } else {
+    window.addEventListener('mousemove', onMove);
+  }
+
+  (function frame(){
+    if(isTouch && autoOn) autoSweep();
+    pos.x += (raw.x - pos.x) * 0.12;
+    pos.y += (raw.y - pos.y) * 0.12;
+    paint(pos.x, pos.y);
+    rafId = requestAnimationFrame(frame);
+  })();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Tan Lerida Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_base",
+      "label": "Base image",
+      "info": "The finished product shot, full-bleed."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_reveal",
+      "label": "Reveal image",
+      "info": "Same framing as base, showing grain/stitch detail. Appears in the cursor spotlight."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1 (italic)",
+      "default": "Crafted to be"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading line 2",
+      "default": "lived in."
+    },
+    {
+      "type": "text",
+      "id": "hint_text",
+      "label": "Hint text under heading",
+      "default": "Move to reveal the grain"
+    },
+    {
+      "type": "textarea",
+      "id": "left_text",
+      "label": "Bottom-left paragraph (hidden on mobile)",
+      "default": "Full-grain leather, cut and finished by hand. Each piece carries the marks of its making and softens into something that is yours alone."
+    },
+    {
+      "type": "textarea",
+      "id": "right_text",
+      "label": "Bottom-right paragraph",
+      "default": "From Adelaide to the world. Jackets, skirts, and everyday leather built to outlast the season."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Explore the collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors & effect"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Button color",
+      "default": "#b06a36"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Button hover color",
+      "default": "#97592c"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading / text color",
+      "default": "#f4ede2"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color (shows before images load)",
+      "default": "#17110c"
+    },
+    {
+      "type": "range",
+      "id": "spotlight_radius",
+      "label": "Spotlight size",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 240
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tan Lerida Hero"
+    }
+  ]
+}
+{% endschema %}

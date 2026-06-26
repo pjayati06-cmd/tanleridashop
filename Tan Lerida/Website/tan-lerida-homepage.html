@@ -143,127 +143,217 @@
     .base { animation: none; } .anim { animation: none; opacity: 1; }
     .ru { opacity: 1; transform: none; transition: none; } .marquee-track { animation: none; }
   }
-</style>
-</head>
-<body>
 
-<nav id="nav" class="nav-container nav-dark-init">
-  <a class="brand" href="/">Tan <em>Lerida</em></a>
-  <div class="nav-pill">
-    <a href="/" class="active">Man</a>
-    <a href="/">Woman</a>
-    <a href="/">Lifestyle</a>
-    <a href="/care-guide">Care</a>
-    <a href="/commitment">Commitment</a>
-  </div>
-  <a class="nav-shop" href="/">Shop</a>
-  <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="layer base"></div>
-  <div class="layer reveal" id="reveal"></div>
-  <div class="grade"></div>
-  <div class="lamp" id="lamp"></div>
-  <div class="grain"></div>
-  <div class="scrim"></div>
-  <div class="heading">
-    <p class="eyebrow anim a-fade" style="animation-delay:.15s">The Atelier</p>
-    <h1>
-      <span class="l1 serif anim a-reveal" style="animation-delay:.28s">Cut and stitched,</span>
-      <span class="l2 anim a-reveal" style="animation-delay:.45s">finished by hand.</span>
-    </h1>
-    <p class="hint anim a-fade" id="hint" style="animation-delay:.95s">Move to reveal the craft</p>
-  </div>
-  <div class="hero-copy-l anim a-fade" style="animation-delay:.7s">
-    <p>We run our own workshop, so every cut, seam, and finish is ours. The marks you see are the maker's, not a machine's.</p>
-  </div>
-  <div class="hero-copy-r anim a-fade" style="animation-delay:.85s">
-    <p>Heritage leather, made in-house and shipped from Adelaide to the world.</p>
-    <a class="cta" href="/">Explore the collection</a>
-  </div>
-
-  /* ============ MARQUEE ============ */
-  .marquee{background:var(--espresso);overflow:hidden;border-top:1px solid rgba(242,233,218,.08);border-bottom:1px solid rgba(242,233,218,.08);}
-  .marquee-track{display:flex;white-space:nowrap;animation:scroll 28s linear infinite;}
-  .marquee-track span{color:var(--cream);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,2.4vw,26px);padding:18px 38px;opacity:.85;}
-  .marquee-track span::after{content:'âœ¦';color:var(--cognac);margin-left:38px;font-style:normal;font-size:.7em;vertical-align:middle;}
-  .marquee:hover .marquee-track{animation-play-state:paused;}
-
-  /* ============ PRODUCTS ============ */
-  .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,56px);}
-  .products{padding:clamp(64px,9vw,120px) 0;}
-  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:48px;flex-wrap:wrap;}
-  .sec-head h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,58px);letter-spacing:-.02em;line-height:1;}
-  .sec-head .sub{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--cognac);font-weight:600;margin-bottom:14px;}
-  .sec-head a{font-size:14px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:3px;transition:.25s;}
-  .sec-head a:hover{color:var(--cognac);border-color:var(--cognac);}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,32px);}
-  @media(min-width:880px){.grid{grid-template-columns:repeat(4,1fr);}}
-  .card{display:block;}
-  .card .ph{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:6px;background:#e7ded0;}
-  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1);}
-  .card:hover .ph img{transform:scale(1.06);}
-  .tag{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--cream);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:999px;font-weight:600;}
-  .quick{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(243,238,229,.92);backdrop-filter:blur(6px);color:var(--ink);text-align:center;font-size:13px;font-weight:600;padding:12px;border-radius:6px;opacity:0;transform:translateY(10px);transition:.3s;}
-  .card:hover .quick{opacity:1;transform:translateY(0);}
-  .card h3{font-size:14px;font-weight:500;margin:16px 0 6px;line-height:1.35;}
-  .price{font-size:14px;}
-  .price .sale{color:var(--cognac);font-weight:600;}
-  .price .reg{color:var(--ink-muted);text-decoration:line-through;margin-left:8px;font-weight:400;}
-
-  /* ============ STORY (split) ============ */
-  .story{background:var(--black);color:var(--cream);overflow:hidden;}
-  .story-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0;}
-  @media(min-width:900px){.story-in{grid-template-columns:1fr 1fr;}}
-  .story-img{position:relative;min-height:60vh;background-image:url('https://tanlerida.com/cdn/shop/files/q7.jpg?v=1777009504&width=1400');background-size:cover;background-position:center;}
-  .story-img::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(18,12,7,.1),rgba(18,12,7,.5));}
-  .story-txt{padding:clamp(48px,8vw,110px) clamp(24px,5vw,80px);display:flex;flex-direction:column;justify-content:center;}
-  .story-txt .sub{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--cognac);font-weight:600;margin-bottom:24px;}
-  .story-txt h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin-bottom:24px;}
-  .story-txt p{font-size:15px;line-height:1.7;color:var(--cream-muted);max-width:440px;margin-bottom:20px;}
-  .story-txt .link{align-self:flex-start;color:var(--cream);border-bottom:1px solid var(--cognac);padding-bottom:4px;font-size:14px;font-weight:500;margin-top:8px;transition:.25s;}
-  .story-txt .link:hover{color:var(--cognac);}
-
-  /* ============ NEWSLETTER ============ */
-  .news{background:var(--paper);padding:clamp(64px,9vw,120px) 0;text-align:center;}
-  .news h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,4.6vw,52px);letter-spacing:-.02em;margin-bottom:14px;}
-  .news p{color:var(--ink-muted);font-size:15px;margin-bottom:32px;}
-  .news form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
-  .news input{flex:1;min-width:220px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:14px 22px;font-size:14px;color:var(--ink);outline:none;transition:.25s;}
-  .news input:focus{border-color:var(--cognac);}
-  .news button{background:var(--ink);color:var(--cream);border:none;cursor:pointer;border-radius:999px;padding:14px 30px;font-size:14px;font-weight:600;transition:.25s;}
-  .news button:hover{background:var(--cognac);}
-
-  /* ============ FOOTER ============ */
-  footer{background:var(--black);color:var(--cream-muted);padding:clamp(56px,7vw,90px) 0 36px;}
-  .foot-grid{display:grid;grid-template-columns:1fr;gap:40px;}
-  @media(min-width:760px){.foot-grid{grid-template-columns:2fr 1fr 1fr 1fr;}}
-  .foot-brand .b{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--cream);margin-bottom:16px;}
-  .foot-brand .b em{font-style:italic;font-weight:500;}
-  .foot-brand p{font-size:14px;line-height:1.6;max-width:300px;}
-  footer h4{color:var(--cream);font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px;font-weight:600;}
-  footer li{list-style:none;margin-bottom:11px;}
-  footer a{font-size:14px;transition:.2s;}
-  footer a:hover{color:var(--cognac);}
-  .foot-bottom{border-top:1px solid rgba(242,233,218,.1);margin-top:56px;padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;}
-
-  /* ============ SCROLL REVEAL ============ */
-  .ru{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
-  .ru.in{opacity:1;transform:none;}
-
-  /* ============ LOAD ANIM ============ */
-  @keyframes kenburns{from{transform:scale(1.12);}to{transform:scale(1);}}
-  @keyframes reveal{from{opacity:0;transform:translateY(26px);filter:blur(10px);}to{opacity:1;transform:translateY(0);filter:blur(0);}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-  .anim{opacity:0;animation-fill-mode:forwards;animation-timing-function:cubic-bezier(.16,1,.3,1);}
-  .a-reveal{animation-name:reveal;animation-duration:1.1s;}
-  .a-fade{animation-name:fadeUp;animation-duration:1s;}
-  @media(prefers-reduced-motion:reduce){
-    .base{animation:none;}.anim{animation:none;opacity:1;}
-    .ru{opacity:1;transform:none;transition:none;}.marquee-track{animation:none;}
+  /* ============ COLLECTION CAROUSEL ============ */
+  #tl-carousel {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 700ms cubic-bezier(.4, 0, .2, 1);
+  }
+  #tl-carousel * { margin: 0; padding: 0; box-sizing: border-box; }
+  #tl-carousel .tl-cr-inner {
+    position: relative;
+    width: 100%;
+    height: 92vh;
+    min-height: 600px;
+    overflow: hidden;
+  }
+  @media(max-width: 639px) {
+    #tl-carousel .tl-cr-inner {
+      height: 86vh;
+      min-height: 520px;
+    }
+  }
+  #tl-carousel .tl-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: .3;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    background-repeat: repeat;
+  }
+  #tl-carousel .tl-ghost {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+    top: 6%;
+  }
+  #tl-carousel .tl-ghost span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(70px, 22vw, 340px);
+    font-weight: 600;
+    font-style: italic;
+    color: white;
+    opacity: .06;
+    line-height: 1;
+    letter-spacing: -.03em;
+    white-space: nowrap;
+    transition: opacity 320ms ease, transform 320ms ease;
+  }
+  #tl-carousel .tl-ghost span.fading { opacity: 0; transform: translateY(10px); }
+  #tl-carousel .tl-vig {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, rgba(0,0,0,.5) 100%);
+  }
+  #tl-carousel .tl-grad {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45%;
+    z-index: 15;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,.15) 50%, transparent 100%);
+  }
+  #tl-carousel .tl-cards { position: absolute; inset: 0; z-index: 3; }
+  #tl-carousel .tl-card {
+    position: absolute;
+    aspect-ratio: 3/4;
+    transition: transform 700ms cubic-bezier(.4, 0, .2, 1),
+               filter 700ms cubic-bezier(.4, 0, .2, 1),
+               opacity 700ms cubic-bezier(.4, 0, .2, 1),
+               left 700ms cubic-bezier(.4, 0, .2, 1),
+               bottom 700ms cubic-bezier(.4, 0, .2, 1),
+               height 700ms cubic-bezier(.4, 0, .2, 1);
+    will-change: transform, filter, opacity;
+  }
+  #tl-carousel .tl-card-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(244, 237, 226, .1);
+  }
+  #tl-carousel .tl-card-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  #tl-carousel .tl-card[data-role="center"] { left: 50%; bottom: 4%; height: 76%; transform: translateX(-50%) scale(1.02); filter: blur(0) brightness(1); opacity: 1; z-index: 20; cursor: default; }
+  #tl-carousel .tl-card[data-role="left"] { left: 20%; bottom: 8%; height: 38%; transform: translateX(-50%) scale(.95); filter: blur(3px) brightness(.65); opacity: .65; z-index: 10; cursor: pointer; }
+  #tl-carousel .tl-card[data-role="right"] { left: 80%; bottom: 8%; height: 38%; transform: translateX(-50%) scale(.95); filter: blur(3px) brightness(.65); opacity: .65; z-index: 10; cursor: pointer; }
+  #tl-carousel .tl-card[data-role="back"] { left: 50%; bottom: 8%; height: 30%; transform: translateX(-50%) scale(.88); filter: blur(6px) brightness(.45); opacity: .4; z-index: 5; cursor: default; }
+  #tl-carousel .tl-card[data-role="hidden"] { left: 50%; bottom: 8%; height: 20%; transform: translateX(-50%) scale(.8); filter: blur(8px) brightness(.3); opacity: 0; z-index: 1; pointer-events: none; }
+  @media(max-width: 639px) {
+    #tl-carousel .tl-card-frame { border-radius: 6px; }
+    #tl-carousel .tl-card[data-role="center"] { bottom: 10%; height: 56%; transform: translateX(-50%) scale(1); }
+    #tl-carousel .tl-card[data-role="left"] { left: 10%; bottom: 18%; height: 26%; }
+    #tl-carousel .tl-card[data-role="right"] { left: 90%; bottom: 18%; height: 26%; }
+    #tl-carousel .tl-card[data-role="back"] { bottom: 20%; height: 20%; }
+  }
+  #tl-carousel .tl-card[data-role="center"] .tl-card-frame { box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  #tl-carousel .tl-dots { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); z-index: 60; display: flex; gap: 8px; }
+  #tl-carousel .tl-dot {
+    height: 3px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    background: rgba(244, 237, 226, .25);
+    width: 8px;
+    transition: all 400ms cubic-bezier(.4, 0, .2, 1);
+  }
+  #tl-carousel .tl-dot.active { width: 28px; background: rgba(244, 237, 226, .9); }
+  @media(max-width: 639px) { #tl-carousel .tl-dots { top: 16px; } }
+  #tl-carousel .tl-text {
+    position: absolute;
+    bottom: 44px;
+    left: 44px;
+    z-index: 60;
+    max-width: 340px;
+  }
+  @media(max-width: 639px) { #tl-carousel .tl-text { bottom: 20px; left: 16px; max-width: 170px; } }
+  #tl-carousel .tl-text .tl-t { transition: opacity 320ms ease, transform 320ms ease; }
+  #tl-carousel .tl-text .tl-t.fading { opacity: 0 !important; transform: translateY(10px); }
+  #tl-carousel .tl-cat {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: #f4ede2;
+    opacity: .5;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  @media(max-width: 639px) { #tl-carousel .tl-cat { font-size: 10px; } }
+  #tl-carousel .tl-hl {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 500;
+    font-style: italic;
+    color: #f4ede2;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    letter-spacing: -.01em;
+  }
+  @media(max-width: 639px) { #tl-carousel .tl-hl { font-size: 22px; margin-bottom: 6px; } }
+  #tl-carousel .tl-body {
+    font-size: 13px;
+    color: #f4ede2;
+    opacity: .55;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    font-weight: 300;
+  }
+  @media(max-width: 639px) { #tl-carousel .tl-body { display: none; } }
+  #tl-carousel .tl-arrows { display: flex; gap: 10px; }
+  #tl-carousel .tl-arr {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(244, 237, 226, .3);
+    background: transparent;
+    color: #f4ede2;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 200ms ease;
+  }
+  #tl-carousel .tl-arr:hover { background: rgba(244, 237, 226, .1); border-color: rgba(244, 237, 226, .5); transform: scale(1.08); }
+  #tl-carousel .tl-arr svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  @media(max-width: 639px) {
+    #tl-carousel .tl-arr { width: 40px; height: 40px; }
+    #tl-carousel .tl-arr svg { width: 16px; height: 16px; }
+  }
+  #tl-carousel .tl-cta-wrap { position: absolute; bottom: 44px; right: 44px; z-index: 60; }
+  @media(max-width: 639px) { #tl-carousel .tl-cta-wrap { bottom: 20px; right: 16px; } }
+  #tl-carousel .tl-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-tannery-green);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 999px;
+    letter-spacing: .01em;
+    transition: all 300ms ease, opacity 320ms ease, transform 320ms ease;
+  }
+  #tl-carousel .tl-cta:hover { background: var(--color-tannery-green-dark); box-shadow: 0 10px 30px rgba(44,74,62,.25); }
+  #tl-carousel .tl-cta.fading { opacity: 0; transform: translateY(10px); }
+  #tl-carousel .tl-cta svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  @media(max-width: 639px) {
+    #tl-carousel .tl-cta { font-size: 12px; padding: 12px 20px; gap: 8px; }
+    #tl-carousel .tl-cta svg { width: 14px; height: 14px; }
   }
 </style>
 </head>
@@ -362,6 +452,74 @@
     </div>
   </div>
 </section>
+
+<!-- COLLECTION CAROUSEL -->
+<section id="tl-carousel" style="background-color: #2A1F17;">
+  <div class="tl-cr-inner">
+    <div class="tl-grain"></div>
+    <div class="tl-vig"></div>
+    <div class="tl-grad"></div>
+
+    <!-- ghost -->
+    <div class="tl-ghost"><span id="tl-ghost-txt">Skirts</span></div>
+
+    <!-- cards -->
+    <div class="tl-cards" id="tl-cards">
+      <div class="tl-card" data-index="0" data-role="center">
+        <div class="tl-card-frame">
+          <img src="https://tanlerida.com/cdn/shop/files/q3.jpg?v=1777008956&width=1200" alt="Skirts" draggable="false" loading="lazy">
+        </div>
+      </div>
+      <div class="tl-card" data-index="1" data-role="right">
+        <div class="tl-card-frame">
+          <img src="https://tanlerida.com/cdn/shop/files/mens-classic-black-leather-jacket-chest-pockets-tan-lerida.png?v=1778084607&width=1200" alt="Jackets — Men" draggable="false" loading="lazy">
+        </div>
+      </div>
+      <div class="tl-card" data-index="2" data-role="back">
+        <div class="tl-card-frame">
+          <img src="https://tanlerida.com/cdn/shop/files/green_suede_jacket.jpg?v=1777697182&width=1200" alt="Jackets — Women" draggable="false" loading="lazy">
+        </div>
+      </div>
+      <div class="tl-card" data-index="3" data-role="left">
+        <div class="tl-card-frame">
+          <img src="https://tanlerida.com/cdn/shop/files/g1.png?v=1774928261&width=1200" alt="Bags & Goods" draggable="false" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- dots -->
+    <div class="tl-dots" id="tl-dots">
+      <button class="tl-dot active" data-idx="0"></button>
+      <button class="tl-dot" data-idx="1"></button>
+      <button class="tl-dot" data-idx="2"></button>
+      <button class="tl-dot" data-idx="3"></button>
+    </div>
+
+    <!-- text -->
+    <div class="tl-text">
+      <p class="tl-cat tl-t" id="tl-cat">Skirts</p>
+      <p class="tl-hl tl-t" id="tl-hl">Cut close, worn free.</p>
+      <p class="tl-body tl-t" id="tl-body">Full-grain leather skirts that move with you. Styled for the street, built for years.</p>
+      <div class="tl-arrows tl-t" id="tl-arrows">
+        <button class="tl-arr" id="tl-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </button>
+        <button class="tl-arr" id="tl-next" aria-label="Next">
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="tl-cta-wrap">
+      <a class="tl-cta" id="tl-cta" href="/collections/skirts">
+        <span id="tl-cta-txt">Shop Skirts</span>
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 
 <!-- STORY -->
 <section class="story">
@@ -473,6 +631,168 @@
     addEventListener('mousemove',function(e){ raw.x=e.clientX; raw.y=e.clientY; });
     loop();
   }
+})();
+
+/* ============ COLLECTION CAROUSEL JS ============ */
+(function(){
+  var data = [
+    {
+      "bg": "#2A1F17",
+      "ghost": "Skirts",
+      "category": "Skirts",
+      "headline": "Cut close, worn free.",
+      "body": "Full-grain leather skirts that move with you. Styled for the street, built for years.",
+      "cta": "Shop Skirts",
+      "url": "/collections/skirts",
+      "img": "https://tanlerida.com/cdn/shop/files/q3.jpg?v=1777008956&width=1200"
+    },
+    {
+      "bg": "#3D2E1A",
+      "ghost": "Jackets",
+      "category": "Jackets — Men",
+      "headline": "Wear the weight of nothing.",
+      "body": "Suede and full-grain silhouettes that age the way leather should.",
+      "cta": "Shop Men's Jackets",
+      "url": "/collections/mens-jackets",
+      "img": "https://tanlerida.com/cdn/shop/files/mens-classic-black-leather-jacket-chest-pockets-tan-lerida.png?v=1778084607&width=1200"
+    },
+    {
+      "bg": "#1A1A1A",
+      "ghost": "Jackets",
+      "category": "Jackets — Women",
+      "headline": "Melbourne, 8 am.",
+      "body": "Fitted leather that sharpens everything around it. Hand-finished, city-tested.",
+      "cta": "Shop Women's Jackets",
+      "url": "/collections/womens-jackets",
+      "img": "https://tanlerida.com/cdn/shop/files/green_suede_jacket.jpg?v=1777697182&width=1200"
+    },
+    {
+      "bg": "#4A3728",
+      "ghost": "Goods",
+      "category": "Bags & Goods",
+      "headline": "Carry what lasts.",
+      "body": "Weekenders, totes, and everyday leather goods. Every stitch placed by hand.",
+      "cta": "Shop Goods",
+      "url": "/collections/goods",
+      "img": "https://tanlerida.com/cdn/shop/files/g1.png?v=1774928261&width=1200"
+    }
+  ];
+  var total = data.length;
+  if(total < 1) return;
+
+  var active = 0, locked = false;
+  var section = document.getElementById('tl-carousel');
+  var cards   = document.querySelectorAll('#tl-cards .tl-card');
+  var dots    = document.querySelectorAll('#tl-dots .tl-dot');
+  var ghost   = document.getElementById('tl-ghost-txt');
+  var cat     = document.getElementById('tl-cat');
+  var hl      = document.getElementById('tl-hl');
+  var body    = document.getElementById('tl-body');
+  var ctaA    = document.getElementById('tl-cta');
+  var ctaTxt  = document.getElementById('tl-cta-txt');
+  var textEls = document.querySelectorAll('.tl-t');
+
+  function roles(idx){
+    var d = ((idx - active) % total + total) % total;
+    if(d === 0) return 'center';
+    if(d === total - 1) return 'left';
+    if(d === 1) return 'right';
+    if(d === 2) return 'back';
+    return 'hidden';
+  }
+
+  function render(){
+    var s = data[active];
+    section.style.backgroundColor = s.bg;
+
+    cards.forEach(function(c){
+      var i = parseInt(c.getAttribute('data-index'));
+      c.setAttribute('data-role', roles(i));
+    });
+
+    dots.forEach(function(d,i){
+      d.classList.toggle('active', i === active);
+    });
+
+    ghost.textContent = s.ghost;
+    cat.textContent   = s.category;
+    hl.textContent    = s.headline;
+    body.textContent  = s.body;
+    ctaTxt.textContent= s.cta;
+    ctaA.href         = s.url || '#';
+  }
+
+  function fadeOut(){
+    textEls.forEach(function(el){ el.classList.add('fading'); });
+    ghost.classList.add('fading');
+    ctaA.classList.add('fading');
+  }
+  function fadeIn(){
+    textEls.forEach(function(el){ el.classList.remove('fading'); });
+    ghost.classList.remove('fading');
+    ctaA.classList.remove('fading');
+  }
+
+  function go(dir){
+    if(locked) return;
+    locked = true;
+    fadeOut();
+    clearInterval(timer);
+    setTimeout(function(){
+      active = dir === 'next' ? (active + 1) % total : (active + total - 1) % total;
+      render();
+      setTimeout(function(){
+        fadeIn();
+        locked = false;
+      }, 80);
+    }, 300);
+  }
+
+  function jumpTo(idx){
+    if(locked || idx === active) return;
+    locked = true;
+    fadeOut();
+    clearInterval(timer);
+    setTimeout(function(){
+      active = idx;
+      render();
+      setTimeout(function(){
+        fadeIn();
+        locked = false;
+      }, 80);
+    }, 300);
+  }
+
+  /* nav */
+  document.getElementById('tl-prev').addEventListener('click', function(){ go('prev'); startTimer(); });
+  document.getElementById('tl-next').addEventListener('click', function(){ go('next'); startTimer(); });
+
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      jumpTo(parseInt(d.getAttribute('data-idx')));
+      startTimer();
+    });
+  });
+
+  /* click side cards */
+  cards.forEach(function(c){
+    c.addEventListener('click', function(){
+      var r = c.getAttribute('data-role');
+      if(r === 'left'){ go('prev'); startTimer(); }
+      else if(r === 'right'){ go('next'); startTimer(); }
+    });
+  });
+
+  /* auto-advance */
+  var timer;
+  function startTimer(){
+    clearInterval(timer);
+    timer = setInterval(function(){ go('next'); }, 5500);
+  }
+  startTimer();
+
+  /* preload */
+  data.forEach(function(s){ var img = new Image(); img.src = s.img; });
 })();
 </script>
 </body>

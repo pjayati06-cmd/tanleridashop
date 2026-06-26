@@ -1,0 +1,527 @@
+{% comment %}
+  TAN LERIDA — COLLECTION CAROUSEL
+  -------------------------------------------------
+  SETUP:
+  1. Shopify Admin → Online Store → Themes → Edit code
+  2. Under Sections, click "Add a new section"
+  3. Name it exactly: tanlerida-carousel
+  4. Delete the placeholder code, paste this entire file, Save
+  5. Go to Customize → Home page → Add section → "Collection Carousel"
+  6. Click "Add slide" to create up to 6 slides
+  7. Each slide has its own image, text, colors, and button — all editable
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+{% assign total = section.blocks.size %}
+{% if total > 0 %}
+
+<style>
+  /* ── scoped to #tl-carousel ── */
+  #tl-carousel{
+    position:relative;
+    width:100vw;left:50%;margin-left:-50vw;
+    overflow:hidden;
+    font-family:'Inter',sans-serif;
+    transition:background-color 700ms cubic-bezier(.4,0,.2,1);
+  }
+  #tl-carousel *{margin:0;padding:0;box-sizing:border-box;}
+  #tl-carousel .tl-cr-inner{
+    position:relative;width:100%;
+    height:{{ section.settings.section_height_desktop }}vh;
+    min-height:600px;overflow:hidden;
+  }
+  @media(max-width:639px){
+    #tl-carousel .tl-cr-inner{
+      height:{{ section.settings.section_height_mobile }}vh;
+      min-height:520px;
+    }
+  }
+
+  /* grain */
+  #tl-carousel .tl-grain{
+    position:absolute;inset:0;pointer-events:none;z-index:50;opacity:.3;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    background-size:200px 200px;background-repeat:repeat;
+  }
+
+  /* ghost text */
+  #tl-carousel .tl-ghost{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    pointer-events:none;user-select:none;z-index:2;top:6%;
+  }
+  #tl-carousel .tl-ghost span{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(70px,22vw,340px);font-weight:600;font-style:italic;
+    color:white;opacity:.06;line-height:1;letter-spacing:-.03em;white-space:nowrap;
+    transition:opacity 320ms ease,transform 320ms ease;
+  }
+  #tl-carousel .tl-ghost span.fading{opacity:0;transform:translateY(10px);}
+
+  /* vignette + bottom grad */
+  #tl-carousel .tl-vig{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 50%,transparent 40%,rgba(0,0,0,.5) 100%);}
+  #tl-carousel .tl-grad{position:absolute;left:0;right:0;bottom:0;height:45%;z-index:15;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,rgba(0,0,0,.15) 50%,transparent 100%);}
+
+  /* cards */
+  #tl-carousel .tl-cards{position:absolute;inset:0;z-index:3;}
+  #tl-carousel .tl-card{
+    position:absolute;aspect-ratio:3/4;
+    transition:transform 700ms cubic-bezier(.4,0,.2,1),
+               filter 700ms cubic-bezier(.4,0,.2,1),
+               opacity 700ms cubic-bezier(.4,0,.2,1),
+               left 700ms cubic-bezier(.4,0,.2,1),
+               bottom 700ms cubic-bezier(.4,0,.2,1),
+               height 700ms cubic-bezier(.4,0,.2,1);
+    will-change:transform,filter,opacity;
+  }
+  #tl-carousel .tl-card-frame{
+    width:100%;height:100%;border-radius:10px;overflow:hidden;
+    border:1px solid rgba(244,237,226,.1);
+  }
+  #tl-carousel .tl-card-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+
+  /* ── role positions: desktop ── */
+  #tl-carousel .tl-card[data-role="center"]{left:50%;bottom:4%;height:76%;transform:translateX(-50%) scale(1.02);filter:blur(0) brightness(1);opacity:1;z-index:20;cursor:default;}
+  #tl-carousel .tl-card[data-role="left"]{left:20%;bottom:8%;height:38%;transform:translateX(-50%) scale(.95);filter:blur(3px) brightness(.65);opacity:.65;z-index:10;cursor:pointer;}
+  #tl-carousel .tl-card[data-role="right"]{left:80%;bottom:8%;height:38%;transform:translateX(-50%) scale(.95);filter:blur(3px) brightness(.65);opacity:.65;z-index:10;cursor:pointer;}
+  #tl-carousel .tl-card[data-role="back"]{left:50%;bottom:8%;height:30%;transform:translateX(-50%) scale(.88);filter:blur(6px) brightness(.45);opacity:.4;z-index:5;cursor:default;}
+  /* hide extras if more than 4 */
+  #tl-carousel .tl-card[data-role="hidden"]{left:50%;bottom:8%;height:20%;transform:translateX(-50%) scale(.8);filter:blur(8px) brightness(.3);opacity:0;z-index:1;pointer-events:none;}
+
+  /* ── role positions: mobile ── */
+  @media(max-width:639px){
+    #tl-carousel .tl-card-frame{border-radius:6px;}
+    #tl-carousel .tl-card[data-role="center"]{bottom:10%;height:56%;transform:translateX(-50%) scale(1);}
+    #tl-carousel .tl-card[data-role="left"]{left:10%;bottom:18%;height:26%;}
+    #tl-carousel .tl-card[data-role="right"]{left:90%;bottom:18%;height:26%;}
+    #tl-carousel .tl-card[data-role="back"]{bottom:20%;height:20%;}
+  }
+
+  /* center card shadow */
+  #tl-carousel .tl-card[data-role="center"] .tl-card-frame{box-shadow:0 30px 80px rgba(0,0,0,.5);}
+
+  /* indicators */
+  #tl-carousel .tl-dots{position:absolute;top:24px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:8px;}
+  #tl-carousel .tl-dot{
+    height:3px;border-radius:2px;border:none;cursor:pointer;padding:0;
+    background:rgba(244,237,226,.25);width:8px;
+    transition:all 400ms cubic-bezier(.4,0,.2,1);
+  }
+  #tl-carousel .tl-dot.active{width:28px;background:rgba(244,237,226,.9);}
+  @media(max-width:639px){#tl-carousel .tl-dots{top:16px;}}
+
+  /* bottom left text */
+  #tl-carousel .tl-text{
+    position:absolute;bottom:44px;left:44px;z-index:60;max-width:340px;
+  }
+  @media(max-width:639px){#tl-carousel .tl-text{bottom:20px;left:16px;max-width:170px;}}
+
+  #tl-carousel .tl-text .tl-t{
+    transition:opacity 320ms ease,transform 320ms ease;
+  }
+  #tl-carousel .tl-text .tl-t.fading{opacity:0 !important;transform:translateY(10px);}
+
+  #tl-carousel .tl-cat{
+    font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;
+    color:#f4ede2;opacity:.5;margin-bottom:8px;line-height:1;
+  }
+  @media(max-width:639px){#tl-carousel .tl-cat{font-size:10px;}}
+
+  #tl-carousel .tl-hl{
+    font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;
+    font-style:italic;color:#f4ede2;line-height:1.1;margin-bottom:14px;
+    letter-spacing:-.01em;
+  }
+  @media(max-width:639px){#tl-carousel .tl-hl{font-size:22px;margin-bottom:6px;}}
+
+  #tl-carousel .tl-body{
+    font-size:13px;color:#f4ede2;opacity:.55;line-height:1.6;
+    margin-bottom:22px;font-weight:300;
+  }
+  @media(max-width:639px){#tl-carousel .tl-body{display:none;}}
+
+  /* arrows */
+  #tl-carousel .tl-arrows{display:flex;gap:10px;}
+  #tl-carousel .tl-arr{
+    width:48px;height:48px;border-radius:50%;
+    border:1.5px solid rgba(244,237,226,.3);
+    background:transparent;color:#f4ede2;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 200ms ease;
+  }
+  #tl-carousel .tl-arr:hover{background:rgba(244,237,226,.1);border-color:rgba(244,237,226,.5);transform:scale(1.08);}
+  #tl-carousel .tl-arr svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  @media(max-width:639px){
+    #tl-carousel .tl-arr{width:40px;height:40px;}
+    #tl-carousel .tl-arr svg{width:16px;height:16px;}
+  }
+
+  /* bottom right CTA */
+  #tl-carousel .tl-cta-wrap{position:absolute;bottom:44px;right:44px;z-index:60;}
+  @media(max-width:639px){#tl-carousel .tl-cta-wrap{bottom:20px;right:16px;}}
+  #tl-carousel .tl-cta{
+    display:inline-flex;align-items:center;gap:10px;
+    background:{{ section.settings.cta_color }};color:#fff;text-decoration:none;
+    font-size:14px;font-weight:500;padding:14px 28px;border-radius:999px;
+    letter-spacing:.01em;
+    transition:all 300ms ease,opacity 320ms ease,transform 320ms ease;
+  }
+  #tl-carousel .tl-cta:hover{filter:brightness(.88);box-shadow:0 10px 30px rgba(0,0,0,.25);}
+  #tl-carousel .tl-cta.fading{opacity:0;transform:translateY(10px);}
+  #tl-carousel .tl-cta svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  @media(max-width:639px){
+    #tl-carousel .tl-cta{font-size:12px;padding:12px 20px;gap:8px;}
+    #tl-carousel .tl-cta svg{width:14px;height:14px;}
+  }
+</style>
+
+{% comment %} ── Build slide data as JSON for JS ── {% endcomment %}
+<script type="application/json" id="tl-carousel-data">
+[
+  {%- for block in section.blocks -%}
+    {
+      "bg": {{ block.settings.bg_color | json }},
+      "ghost": {{ block.settings.ghost_text | json }},
+      "category": {{ block.settings.category | json }},
+      "headline": {{ block.settings.headline | json }},
+      "body": {{ block.settings.body | json }},
+      "cta": {{ block.settings.cta_label | json }},
+      "url": {{ block.settings.cta_url | json }},
+      "img": {{ block.settings.image | image_url: width: 1200 | json }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]
+</script>
+
+<section id="tl-carousel" style="background-color:{{ section.blocks.first.settings.bg_color }};">
+  <div class="tl-cr-inner">
+    <div class="tl-grain"></div>
+    <div class="tl-vig"></div>
+    <div class="tl-grad"></div>
+
+    <!-- ghost -->
+    <div class="tl-ghost"><span id="tl-ghost-txt">{{ section.blocks.first.settings.ghost_text }}</span></div>
+
+    <!-- cards -->
+    <div class="tl-cards" id="tl-cards">
+      {%- for block in section.blocks -%}
+        <div class="tl-card" data-index="{{ forloop.index0 }}" data-role="{% if forloop.index0 == 0 %}center{% elsif forloop.index0 == 1 %}right{% elsif forloop.index == total %}left{% elsif forloop.index0 == 2 %}back{% else %}hidden{% endif %}" {{ block.shopify_attributes }}>
+          <div class="tl-card-frame">
+            {%- if block.settings.image -%}
+              <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.category }}" draggable="false" loading="lazy">
+            {%- else -%}
+              <div style="width:100%;height:100%;background:#333;display:flex;align-items:center;justify-content:center;color:#f4ede2;font-size:14px;opacity:.5;">Upload image</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- dots -->
+    <div class="tl-dots" id="tl-dots">
+      {%- for block in section.blocks -%}
+        <button class="tl-dot{% if forloop.index0 == 0 %} active{% endif %}" data-idx="{{ forloop.index0 }}"></button>
+      {%- endfor -%}
+    </div>
+
+    <!-- text -->
+    <div class="tl-text">
+      <p class="tl-cat tl-t" id="tl-cat">{{ section.blocks.first.settings.category }}</p>
+      <p class="tl-hl tl-t" id="tl-hl">{{ section.blocks.first.settings.headline }}</p>
+      <p class="tl-body tl-t" id="tl-body">{{ section.blocks.first.settings.body }}</p>
+      <div class="tl-arrows tl-t" id="tl-arrows">
+        <button class="tl-arr" id="tl-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </button>
+        <button class="tl-arr" id="tl-next" aria-label="Next">
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="tl-cta-wrap">
+      <a class="tl-cta" id="tl-cta" href="{{ section.blocks.first.settings.cta_url }}">
+        <span id="tl-cta-txt">{{ section.blocks.first.settings.cta_label }}</span>
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var data = JSON.parse(document.getElementById('tl-carousel-data').textContent);
+  var total = data.length;
+  if(total < 1) return;
+
+  var active = 0, locked = false;
+  var section = document.getElementById('tl-carousel');
+  var cards   = document.querySelectorAll('#tl-cards .tl-card');
+  var dots    = document.querySelectorAll('#tl-dots .tl-dot');
+  var ghost   = document.getElementById('tl-ghost-txt');
+  var cat     = document.getElementById('tl-cat');
+  var hl      = document.getElementById('tl-hl');
+  var body    = document.getElementById('tl-body');
+  var ctaA    = document.getElementById('tl-cta');
+  var ctaTxt  = document.getElementById('tl-cta-txt');
+  var arrows  = document.getElementById('tl-arrows');
+  var textEls = document.querySelectorAll('.tl-t');
+
+  function roles(idx){
+    var d = ((idx - active) % total + total) % total;
+    if(d === 0) return 'center';
+    if(d === total - 1) return 'left';
+    if(d === 1) return 'right';
+    if(d === 2) return 'back';
+    return 'hidden';
+  }
+
+  function render(){
+    var s = data[active];
+    section.style.backgroundColor = s.bg;
+
+    cards.forEach(function(c){
+      var i = parseInt(c.getAttribute('data-index'));
+      c.setAttribute('data-role', roles(i));
+    });
+
+    dots.forEach(function(d,i){
+      d.classList.toggle('active', i === active);
+    });
+
+    ghost.textContent = s.ghost;
+    cat.textContent   = s.category;
+    hl.textContent    = s.headline;
+    body.textContent  = s.body;
+    ctaTxt.textContent= s.cta;
+    ctaA.href         = s.url || '#';
+  }
+
+  function fadeOut(){
+    textEls.forEach(function(el){ el.classList.add('fading'); });
+    ghost.classList.add('fading');
+    ctaA.classList.add('fading');
+  }
+  function fadeIn(){
+    textEls.forEach(function(el){ el.classList.remove('fading'); });
+    ghost.classList.remove('fading');
+    ctaA.classList.remove('fading');
+  }
+
+  function go(dir){
+    if(locked) return;
+    locked = true;
+    fadeOut();
+    clearInterval(timer);
+    setTimeout(function(){
+      active = dir === 'next' ? (active + 1) % total : (active + total - 1) % total;
+      render();
+      setTimeout(function(){
+        fadeIn();
+        locked = false;
+      }, 80);
+    }, 300);
+  }
+
+  function jumpTo(idx){
+    if(locked || idx === active) return;
+    locked = true;
+    fadeOut();
+    clearInterval(timer);
+    setTimeout(function(){
+      active = idx;
+      render();
+      setTimeout(function(){
+        fadeIn();
+        locked = false;
+      }, 80);
+    }, 300);
+  }
+
+  /* nav */
+  document.getElementById('tl-prev').addEventListener('click', function(){ go('prev'); startTimer(); });
+  document.getElementById('tl-next').addEventListener('click', function(){ go('next'); startTimer(); });
+
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      jumpTo(parseInt(d.getAttribute('data-idx')));
+      startTimer();
+    });
+  });
+
+  /* click side cards */
+  cards.forEach(function(c){
+    c.addEventListener('click', function(){
+      var r = c.getAttribute('data-role');
+      if(r === 'left'){ go('prev'); startTimer(); }
+      else if(r === 'right'){ go('next'); startTimer(); }
+    });
+  });
+
+  /* auto-advance */
+  var timer;
+  function startTimer(){
+    clearInterval(timer);
+    timer = setInterval(function(){ go('next'); }, 5500);
+  }
+  startTimer();
+
+  /* preload */
+  data.forEach(function(s){ var img = new Image(); img.src = s.img; });
+})();
+</script>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Collection Carousel",
+  "tag": "section",
+  "class": "tl-carousel-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_height_desktop",
+      "label": "Section height — desktop (vh)",
+      "min": 60,
+      "max": 100,
+      "step": 2,
+      "default": 92,
+      "unit": "vh"
+    },
+    {
+      "type": "range",
+      "id": "section_height_mobile",
+      "label": "Section height — mobile (vh)",
+      "min": 60,
+      "max": 100,
+      "step": 2,
+      "default": 86,
+      "unit": "vh"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "cta_color",
+      "label": "Button color",
+      "default": "#b06a36"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#2A1F17"
+        },
+        {
+          "type": "text",
+          "id": "ghost_text",
+          "label": "Ghost watermark text",
+          "default": "Leather"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category label",
+          "default": "Jackets"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": "Wear the weight of nothing."
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body copy (hidden on mobile)",
+          "default": "Full-grain leather, cut and finished by hand. Built to outlast the season."
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "Button text",
+          "default": "Shop Jackets"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Carousel",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#2A1F17",
+            "ghost_text": "Skirts",
+            "category": "Skirts",
+            "headline": "Cut close, worn free.",
+            "body": "Full-grain leather skirts that move with you. Styled for the street, built for years.",
+            "cta_label": "Shop Skirts"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#3D2E1A",
+            "ghost_text": "Jackets",
+            "category": "Jackets — Men",
+            "headline": "Wear the weight of nothing.",
+            "body": "Suede and full-grain silhouettes that age the way leather should.",
+            "cta_label": "Shop Men's Jackets"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#1A1A1A",
+            "ghost_text": "Jackets",
+            "category": "Jackets — Women",
+            "headline": "Melbourne, 8 am.",
+            "body": "Fitted leather that sharpens everything around it. Hand-finished, city-tested.",
+            "cta_label": "Shop Women's Jackets"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#4A3728",
+            "ghost_text": "Goods",
+            "category": "Bags & Goods",
+            "headline": "Carry what lasts.",
+            "body": "Weekenders, totes, and everyday leather goods. Every stitch placed by hand.",
+            "cta_label": "Shop Goods"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}

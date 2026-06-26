@@ -52,6 +52,8 @@ if (!fs.existsSync(sourceDir)) {
 
 const filesToSync = [
   { src: 'sections/atelier-hero.liquid', dest: 'sections/atelier-hero.liquid' },
+  { src: 'sections/tan-lerida-hero.liquid', dest: 'sections/tan-lerida-hero.liquid' },
+  { src: 'sections/tanlerida-carousel.liquid', dest: 'sections/tanlerida-carousel.liquid' },
   { src: 'layout/theme.liquid', dest: 'layout/theme.liquid' },
   { src: 'templates/index.json', dest: 'templates/index.json' },
   { src: 'assets/tan-lerida-custom.css', dest: 'assets/tan-lerida-custom.css' },
